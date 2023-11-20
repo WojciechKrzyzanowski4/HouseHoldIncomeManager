@@ -1,5 +1,6 @@
 package com.Wkrzyz.HouseHoldIncomeManager.controller;
 
+import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class AuthController {
@@ -32,6 +35,7 @@ public class AuthController {
     public String showRegistrationForm(Model model){
         // create model object to store form data
         UserDto user = new UserDto();
+
         model.addAttribute("user", user);
         return "register";
     }
@@ -49,7 +53,7 @@ public class AuthController {
         //System.out.println(users);
         return "users";
     }
-    @GetMapping("/test")
+    @GetMapping("/adminPage")
     public String testUser(Neo4jProperties.Authentication authentication){
         System.out.println(authentication);
         return "_core";
@@ -70,6 +74,10 @@ public class AuthController {
             model.addAttribute("user", userDto);
             return "/register";
         }
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(Role.ADMIN);
+        userDto.setRoles(roles);
 
         userService.saveUser(userDto);
         return "redirect:/register?success";

@@ -1,6 +1,9 @@
 package com.Wkrzyz.HouseHoldIncomeManager.model.dto;
 
+import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
+
+import java.util.Set;
 
 public class UserDto {
 
@@ -12,7 +15,7 @@ public class UserDto {
 
     private String password;
 
-    private Integer level;
+    private Set<Role> roles;
 
 
     public UserDto(){
@@ -23,7 +26,8 @@ public class UserDto {
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
-        this.level = user.getLevel();
+        this.roles = user.getRoles();
+
     }
 
     public Integer getId() {
@@ -58,11 +62,11 @@ public class UserDto {
         this.password = password;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

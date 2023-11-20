@@ -1,6 +1,7 @@
 package com.Wkrzyz.HouseHoldIncomeManager.security;
 
 
+import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,9 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,11 +28,19 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(email);
         System.out.println(email);
         if (user != null) {
-            List<GrantedAuthority> privileges = new LinkedList<>();
-            privileges.add(new SimpleGrantedAuthority("USER"));
-            return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                    user.getPassword(),
-                    privileges);
+            //code for granting the user privileges
+            //List<GrantedAuthority> privileges = new LinkedList<>();
+            //privileges.add(new SimpleGrantedAuthority("USER"));
+            //return new org.springframework.security.core.userdetails.User(user.getEmail(),
+                    //user.getPassword(),
+                    //privileges);
+
+            return org.springframework.security.core.userdetails.User
+                    .withUsername(user.getEmail())
+                    .password(user.getPassword())
+                    .roles(user.getRoles().stream().map(Enum::name).toArray(String[]::new))
+                    .build();
+
         }else{
             throw new UsernameNotFoundException("Invalid username or password.");
 

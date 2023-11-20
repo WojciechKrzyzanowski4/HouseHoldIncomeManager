@@ -1,6 +1,7 @@
 package com.Wkrzyz.HouseHoldIncomeManager.services.impl;
 
 
+import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.repository.UserRepository;
@@ -9,7 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,9 +30,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDto userDto) {
+
         User user = new User();
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
+        // we save the user with the appropiate privileges;
+        user.setRoles(userDto.getRoles());
         // encrypt the password using spring security
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userRepository.save(user);
@@ -54,6 +60,7 @@ public class UserServiceImpl implements UserService {
 
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());
+        userDto.setId(user.getId());
 
         return userDto;
     }

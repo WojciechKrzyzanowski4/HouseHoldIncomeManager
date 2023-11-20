@@ -9,6 +9,17 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
+
+    <style>
+        body{
+            background-color: black;
+        }
+        h1{
+            font-family: Courier New;
+        }
+
+    </style>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -22,6 +33,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/register}">Register</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -29,7 +43,7 @@
 <br /><br />
 <div class="container">
     <div class="row">
-        <h1 class="text-center"> Hh Income Manager </h1>
+        <h1 class="text-center" style="color:white"> Household Income Manager </h1>
     </div>
 </div>
 </body>

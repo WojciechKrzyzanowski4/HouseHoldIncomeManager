@@ -1,10 +1,10 @@
 package com.Wkrzyz.HouseHoldIncomeManager.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
+import jakarta.persistence.*;
+
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -19,27 +19,29 @@ public class User {
 
     private String password;
 
-    private Integer level;
 
-    public Integer getLevel() {
-        return level;
-    }
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
+
 
     public User() {
 
     }
-    public User(Integer id, String name, String email, String password, Integer level) {
+    public User(Integer id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.level = level;
     }
 
+    public User(Integer id, String name, String email, String password, Set<Role> roles) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 
     public Integer getId() {
         return id;
@@ -71,5 +73,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
