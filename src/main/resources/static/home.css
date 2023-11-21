@@ -1,6 +1,42 @@
 body{
-    background-color: black;
+    background-color:black;
+    background-image: url('images/0te8f6id.bmp');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    min-height: 100vh;
+    overflow: hidden;
 }
+
 h1{
-    font-family: Courier New;
+    font-size: 60px;
+    color:aliceblue;
+    margin-top: 300px;
+    color: rgba(255, 255, 255);
+}
+p{
+    font-size: 40px;
+    color:aliceblue;
+}
+
+.button {
+    background-color: transparent;
+    border: 2px solid white;
+    cursor: pointer;
+    color: white;
+    padding: 40px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    width: 100%;
+    border-radius: 20px;
+    transition-duration: 0.4s;
+
+
+}
+
+.button:hover {
+    color: black;
+    background-color:white;
+
 }
