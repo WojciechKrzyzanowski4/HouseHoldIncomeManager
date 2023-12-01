@@ -23,14 +23,14 @@ p{
     border: 2px solid white;
     cursor: pointer;
     color: white;
-    padding: 40px 40px;
+    padding: 30px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 30px;
     width: 100%;
     border-radius: 20px;
-    transition-duration: 0.4s;
+    transition-duration: 0.7s;
 
 
 }

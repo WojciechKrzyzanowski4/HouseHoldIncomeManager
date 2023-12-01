@@ -25,10 +25,12 @@ public class UserDto {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.password = user.getPassword();
+        //this.password = user.getPassword();
         this.roles = user.getRoles();
 
     }
+
+
 
     public Integer getId() {
         return id;
