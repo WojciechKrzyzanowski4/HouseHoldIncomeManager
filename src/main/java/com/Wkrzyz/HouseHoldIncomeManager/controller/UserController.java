@@ -32,4 +32,7 @@ public class UserController {
         return "saved";
 
     }
+
+    //some of the admin functionality will be handled by this controller
+    //this means adding users to the group and so on
 }

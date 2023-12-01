@@ -26,48 +26,56 @@ public class AuthController {
 
     @Autowired
     UserService userService;
-    // handler method to handle home page request
+
+    /** handler method to handle home page request
+     *
+     * @return home page
+     */
     @GetMapping("/home")
     public String home(){
         return "home";
     }
 
-    // handler method to handle user registration form request
+    /**
+     * handler method to handle user registration form request
+     * @return register page
+     * */
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
-        // create model object to store form data
+        // create the model object to store form data
         UserDto user = new UserDto();
-
         model.addAttribute("user", user);
         return "register";
     }
 
-    // handler method to handle login request
+    /** handler method to handle login request
+     *
+     * @return login page
+     */
     @GetMapping("/login")
     public String login(){
         return "login";
     }
 
+    /**handler method that returns all users in the database
+     * @return users page
+     * */
     @GetMapping("/users")
     public String users(Model model){
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
-        //System.out.println(users);
         return "users";
     }
     /**
-     * this function is an example how to get the data regarding the currently logged in user
+     * this function is an example how to get the data regarding the currently logged-in user
+     * @return _core page
      * */
     @GetMapping("/adminPage")
     public String testUser(Neo4jProperties.Authentication authentication, Model model){
-        //getting the context of the currently logged in user
+        //getting the context of the currently logged-in user
         SecurityContext context = SecurityContextHolder.getContext();
-        //using the context to retrive the email of the currently logged in user
-        System.out.println(context.getAuthentication().getName());
-        System.out.println(context);
-
+        //using the context to retrive the email of the currently logged-in user
         User user = userService.findUserByEmail(context.getAuthentication().getName());
-        //zaimplementowac konstruktor kopiujący
         UserDto userDto = new UserDto(user);
         Set<Role> roles = userDto.getRoles();
         for(Role r : roles){
@@ -78,27 +86,32 @@ public class AuthController {
         }
         return "_core";
     }
-
+    /**
+     * handler method that saves the user in the database
+     * */
     @PostMapping("/register/save")
     public String registration( @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
                                Model model){
+
+        //checking if the user already exists in the database
         User existingUser = userService.findUserByEmail(userDto.getEmail());
 
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");
         }
-
+        //checking if the result of the action has errors
         if(result.hasErrors()){
             model.addAttribute("user", userDto);
             return "/register";
         }
-
+        //creating the roles set for the user
         Set<Role> roles = new HashSet<>();
         roles.add(Role.ADMIN);
         userDto.setRoles(roles);
 
+        //saving the user in the database
         userService.saveUser(userDto);
         return "redirect:/register?success";
     }
