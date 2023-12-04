@@ -93,6 +93,11 @@ public class AuthController {
                                BindingResult result,
                                Model model){
 
+        //checking if the user provided all the necessary credentials
+        if(userDto.getEmail().equals("") || userDto.getPassword().equals("") || userDto.getName().equals("")){
+            result.rejectValue("email", null,
+                    "default error message");
+        }
         //checking if the user already exists in the database
         User existingUser = userService.findUserByEmail(userDto.getEmail());
 
@@ -103,7 +108,7 @@ public class AuthController {
         //checking if the result of the action has errors
         if(result.hasErrors()){
             model.addAttribute("user", userDto);
-            return "/register";
+            return "redirect:/register?failure";
         }
         //creating the roles set for the user
         Set<Role> roles = new HashSet<>();
