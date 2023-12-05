@@ -14,7 +14,7 @@ public class bezZnaczenia implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        System.out.println("us");
+        System.out.println("yoopikayeee");
 
     }
 }
