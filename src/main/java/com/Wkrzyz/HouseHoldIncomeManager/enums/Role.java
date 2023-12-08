@@ -1,9 +1,7 @@
 package com.Wkrzyz.HouseHoldIncomeManager.enums;
 
 public enum Role {
-    TINY,
-
     ADMIN,
-
+    TINY,
     USER,
 }

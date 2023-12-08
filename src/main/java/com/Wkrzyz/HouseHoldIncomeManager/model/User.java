@@ -3,6 +3,7 @@ package com.Wkrzyz.HouseHoldIncomeManager.model;
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,10 +20,11 @@ public class User {
 
     private String password;
 
-
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Transfer> userTransfers = new ArrayList<>();
 
 
     public User() {
@@ -81,5 +83,14 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+
+    public List<Transfer> getUserTransfers() {
+        return userTransfers;
+    }
+
+    public void setUserTransfers(List<Transfer> userTransfers) {
+        this.userTransfers = userTransfers;
     }
 }

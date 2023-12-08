@@ -1,5 +1,11 @@
 package com.Wkrzyz.HouseHoldIncomeManager.controller;
 
+import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
+import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
+import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
@@ -10,28 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
-@RequestMapping(path = "/user")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    UserService userService;
 
     @Autowired
-    private UserService userService;
-
-    @PostMapping(path = "/add")
-    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email, @RequestParam String password) {
-
-        User u = new User();
-        u.setName(name);
-        u.setEmail(email);
-        u.setPassword(password);
-        userRepository.save(u);
-        return "saved";
-
-    }
+    TransferService transferService;
 
     //some of the admin functionality will be handled by this controller
     //this means adding users to the group and so on

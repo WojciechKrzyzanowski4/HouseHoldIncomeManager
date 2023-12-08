@@ -1,8 +1,10 @@
 package com.Wkrzyz.HouseHoldIncomeManager.model.dto;
 
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
+import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 
+import java.util.List;
 import java.util.Set;
 
 public class UserDto {
@@ -17,6 +19,8 @@ public class UserDto {
 
     private Set<Role> roles;
 
+    private List<Transfer> userTransfers;
+
 
     public UserDto(){
 
@@ -27,6 +31,7 @@ public class UserDto {
         this.email = user.getEmail();
         //this.password = user.getPassword();
         this.roles = user.getRoles();
+        this.userTransfers = user.getUserTransfers();
 
     }
 
@@ -70,5 +75,13 @@ public class UserDto {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Transfer> getUserTransfers() {
+        return userTransfers;
+    }
+
+    public void setUserTransfers(List<Transfer> userTransfers) {
+        this.userTransfers = userTransfers;
     }
 }

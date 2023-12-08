@@ -2,7 +2,9 @@ package com.Wkrzyz.HouseHoldIncomeManager.controller;
 
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
+import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
+import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
@@ -25,7 +27,6 @@ public class AuthController {
 
     @Autowired
     UserService userService;
-
     /** handler method to handle home page request
      *
      * @return home page
@@ -65,6 +66,8 @@ public class AuthController {
         model.addAttribute("users", users);
         return "users";
     }
+
+
     /**
      * this function is an example how to get the data regarding the currently logged-in user
      * @return _core page
