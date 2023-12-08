@@ -30,6 +30,7 @@ public class TransferController {
         SecurityContext context = SecurityContextHolder.getContext();
         //using the context to retrive the email of the currently logged-in user
         User user = userService.findUserByEmail(context.getAuthentication().getName());
+        model.addAttribute("user", user);
         List<TransferDto> transfers = transferService.findAllByOwner(user.getId());
         model.addAttribute("transfers", transfers);
         return "transfers";
