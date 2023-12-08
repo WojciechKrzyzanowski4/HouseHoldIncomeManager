@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                 };
             }
-
+            // We can also change the data and so on using methods like this
             // Add more options as needed for other chart types
             return {};
         }
