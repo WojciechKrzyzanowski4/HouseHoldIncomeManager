@@ -6,7 +6,10 @@ import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 
 import java.util.List;
 import java.util.Set;
-
+/**
+ * Data transfer Object for the User class
+ * It used transfer only the necessary fields in a given action
+ * */
 public class UserDto {
 
     private Integer id;

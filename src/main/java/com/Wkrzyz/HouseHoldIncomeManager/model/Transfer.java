@@ -3,6 +3,9 @@ package com.Wkrzyz.HouseHoldIncomeManager.model;
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Category;
 import jakarta.persistence.*;
 
+/**
+ * Model class that represents the transfer table in the database
+ */
 @Entity
 public class Transfer {
 

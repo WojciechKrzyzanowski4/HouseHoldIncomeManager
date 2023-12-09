@@ -8,6 +8,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+/**
+ * Interface that extends CrudRepository and is used to retrieve data form the database
+ * It is used in regard to the transfer data table
+ */
 public interface TransferRepository extends CrudRepository<Transfer, Integer> {
 
     //if this piece of shit works I will be very impressed

@@ -72,6 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
             } else if (chartType === 'bar') {
                 return {
+
+                    //you could put the code for changing the data format here
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {

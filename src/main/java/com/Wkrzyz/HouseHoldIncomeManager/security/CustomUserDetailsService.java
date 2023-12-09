@@ -13,7 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * Service class that implements the userDetailsService methods
+ * @methods:
+ * loadUserByUsername - the email is the field used for searching because it is the field that cannot be duplicated between users
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -28,7 +32,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(email);
         System.out.println(email);
         if (user != null) {
-            //code for granting the user privileges
+
+            //old code for granting the user privileges
             //List<GrantedAuthority> privileges = new LinkedList<>();
             //privileges.add(new SimpleGrantedAuthority("USER"));
             //return new org.springframework.security.core.userdetails.User(user.getEmail(),

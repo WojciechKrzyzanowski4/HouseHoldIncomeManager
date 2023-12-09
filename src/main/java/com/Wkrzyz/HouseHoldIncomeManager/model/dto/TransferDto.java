@@ -3,8 +3,10 @@ package com.Wkrzyz.HouseHoldIncomeManager.model.dto;
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Category;
 import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
-
-
+/**
+ * Data transfer Object for the Transfer class
+ * It used transfer only the necessary fields in a given action
+ * */
 public class TransferDto {
 
     private Integer id;

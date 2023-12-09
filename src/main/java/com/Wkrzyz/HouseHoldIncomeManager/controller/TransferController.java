@@ -1,5 +1,6 @@
 package com.Wkrzyz.HouseHoldIncomeManager.controller;
 
+import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
@@ -31,6 +32,7 @@ public class TransferController {
         //using the context to retrive the email of the currently logged-in user
         User user = userService.findUserByEmail(context.getAuthentication().getName());
         model.addAttribute("user", user);
+        //List<Transfer> transfers = user.getUserTransfers();
         List<TransferDto> transfers = transferService.findAllByOwner(user.getId());
         model.addAttribute("transfers", transfers);
         return "transfers";
@@ -39,7 +41,8 @@ public class TransferController {
     public String findTransfers(Neo4jProperties.Authentication authentication, Model model){
         //getting the context of the currently logged-in user
         SecurityContext context = SecurityContextHolder.getContext();
-        //using the context to retrive the email of the currently logged-in user
+        User user = userService.findUserByEmail(context.getAuthentication().getName());
+        model.addAttribute("user", user);
         List<TransferDto> transfers = transferService.findAll();
         model.addAttribute("transfers", transfers);
         return "transfers";
