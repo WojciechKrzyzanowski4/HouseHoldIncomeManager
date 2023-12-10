@@ -13,5 +13,7 @@ public enum Category {
     WORK_INCOME,
     BONUS,
     GIFT,
-    ALLOWANCE,
+    ALLOWANCE;
+
+
 }

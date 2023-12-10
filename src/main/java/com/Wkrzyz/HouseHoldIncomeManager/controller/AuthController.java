@@ -73,7 +73,7 @@ public class AuthController {
      * @return _core page
      * */
     @GetMapping("/adminPage")
-    public String testUser(Neo4jProperties.Authentication authentication, Model model){
+    public String testUser(Model model){
         //getting the context of the currently logged-in user
         SecurityContext context = SecurityContextHolder.getContext();
         //using the context to retrive the email of the currently logged-in user

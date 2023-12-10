@@ -29,7 +29,7 @@ public class TransferController {
     private TransferService transferService;
 
     @GetMapping("/transfers")
-    public String findUserTransfers(Neo4jProperties.Authentication authentication, Model model){
+    public String findUserTransfers(Model model){
         //getting the context of the currently logged-in user
         SecurityContext context = SecurityContextHolder.getContext();
         //using the context to retrive the email of the currently logged-in user
@@ -41,7 +41,7 @@ public class TransferController {
         return "transfers";
     }
     @GetMapping("/transfers/all")
-    public String findTransfers(Neo4jProperties.Authentication authentication, Model model){
+    public String findTransfers(Model model){
         //getting the context of the currently logged-in user
         SecurityContext context = SecurityContextHolder.getContext();
         User user = userService.findUserByEmail(context.getAuthentication().getName());
@@ -51,12 +51,12 @@ public class TransferController {
         return "transfers";
     }
 
-    @PostMapping("/transfer/save")
+    @PostMapping("/transfers/save")
     public String saveTransfer(@ModelAttribute("transfer") TransferDto transferDto, Model model){
 
         //handle the save method here
         //probably return the same page as the one we use to save the transfer but this reamains to be seen
 
-        return "transfers";
+        return "redirect:/transfers?success";
     }
 }
