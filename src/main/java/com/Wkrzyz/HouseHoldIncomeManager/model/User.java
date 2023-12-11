@@ -28,6 +28,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Transfer> userTransfers = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "userGroup_id")
+    private UserGroup userGroup;
+
 
     public User() {
 
@@ -94,5 +98,13 @@ public class User {
 
     public void setUserTransfers(List<Transfer> userTransfers) {
         this.userTransfers = userTransfers;
+    }
+
+    public UserGroup getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
     }
 }

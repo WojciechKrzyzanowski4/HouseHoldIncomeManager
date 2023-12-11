@@ -21,6 +21,12 @@ public class Transfer {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "userGroup_id")
+    private UserGroup userGroup;
+
+
+
     private boolean isRecurring;
 
     public Transfer() {}
@@ -72,4 +78,13 @@ public class Transfer {
     public void setIsRecurring(boolean recurring) {
         isRecurring = recurring;
     }
+    public UserGroup getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
+    }
+
+
 }
