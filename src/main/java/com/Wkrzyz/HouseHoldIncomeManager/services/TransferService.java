@@ -11,6 +11,8 @@ public interface TransferService {
 
     void saveTransfer(TransferDto transferDto);
 
+    Transfer findTransferByID(Integer id);
+
     List<TransferDto> findAllByOwner(Integer user_id);
 
     List<TransferDto> findAll();

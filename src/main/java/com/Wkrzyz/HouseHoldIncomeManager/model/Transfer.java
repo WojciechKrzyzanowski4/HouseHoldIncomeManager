@@ -17,6 +17,7 @@ public class Transfer {
 
     private Category category;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -28,6 +29,8 @@ public class Transfer {
 
 
     private boolean isRecurring;
+
+
 
     public Transfer() {}
 

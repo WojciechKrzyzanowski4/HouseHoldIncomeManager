@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,6 +36,12 @@ public class TransferServiceImpl implements TransferService {
         transfer.setIsRecurring(transferDto.getIsRecurring());
 
         transferRepository.save(transfer);
+    }
+
+    @Override
+    public Transfer findTransferByID(Integer id) {
+        Optional<Transfer> transferDto = transferRepository.findById(id);
+        return transferDto.orElse(null);
     }
 
     @Override

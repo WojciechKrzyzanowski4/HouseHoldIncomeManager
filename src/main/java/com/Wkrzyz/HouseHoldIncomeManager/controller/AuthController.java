@@ -77,8 +77,7 @@ public class AuthController {
         //getting the context of the currently logged-in user
         SecurityContext context = SecurityContextHolder.getContext();
         //using the context to retrive the email of the currently logged-in user
-        User user = userService.findUserByEmail(context.getAuthentication().getName());
-        UserDto userDto = new UserDto(user);
+        UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
         Set<Role> roles = userDto.getRoles();
         for(Role r : roles){
             //we retrive a set from the database according to the found email
@@ -102,7 +101,7 @@ public class AuthController {
                     "default error message");
         }
         //checking if the user already exists in the database
-        User existingUser = userService.findUserByEmail(userDto.getEmail());
+        UserDto existingUser = userService.findUserDtoByEmail(userDto.getEmail());
 
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,

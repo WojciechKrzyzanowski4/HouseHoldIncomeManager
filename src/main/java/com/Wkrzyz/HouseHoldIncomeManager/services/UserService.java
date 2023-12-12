@@ -8,6 +8,8 @@ public interface UserService {
 
     void saveUser(UserDto userDto);
 
+    UserDto findUserDtoByEmail(String email);
+
     User findUserByEmail(String email);
 
     List<UserDto> findAllUsers();
