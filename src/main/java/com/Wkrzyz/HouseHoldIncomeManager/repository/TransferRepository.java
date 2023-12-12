@@ -13,8 +13,6 @@ import java.util.Optional;
 public interface TransferRepository extends CrudRepository<Transfer, Integer> {
 
 
-    Optional<Transfer> findById(Integer id);
-
     //if this piece of shit works I will be very impressed
     //the piece of shit did indeed work
 

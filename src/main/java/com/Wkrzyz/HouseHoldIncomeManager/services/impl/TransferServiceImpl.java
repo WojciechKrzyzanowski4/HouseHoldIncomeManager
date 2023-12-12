@@ -39,12 +39,6 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public Transfer findTransferByID(Integer id) {
-        Optional<Transfer> transferDto = transferRepository.findById(id);
-        return transferDto.orElse(null);
-    }
-
-    @Override
     public List<TransferDto> findAllByOwner(Integer user_id) {
         List<Transfer> databaseTransfers = transferRepository.findByUser_id(user_id);
         return databaseTransfers.stream()

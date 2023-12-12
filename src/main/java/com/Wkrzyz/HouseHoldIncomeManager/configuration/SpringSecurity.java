@@ -33,6 +33,7 @@ public class SpringSecurity {
                                 .requestMatchers("/register").permitAll()
                                 .requestMatchers("/users").authenticated()
                                 .requestMatchers("/transfers").authenticated()
+                                .requestMatchers("/addtransfer").authenticated()
                                 .requestMatchers("/adminPage").hasRole("ADMIN")
                                 .anyRequest().permitAll()
 

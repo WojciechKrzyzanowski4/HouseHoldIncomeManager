@@ -89,6 +89,9 @@ public class AuthController {
     }
     /**
      * handler method that saves the user in the database
+     * @param userDto
+     * @param result
+     * @param model
      * */
     @PostMapping("/register/save")
     public String registration( @ModelAttribute("user") UserDto userDto,

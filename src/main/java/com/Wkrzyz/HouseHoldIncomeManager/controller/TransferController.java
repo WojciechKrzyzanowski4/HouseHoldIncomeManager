@@ -44,7 +44,11 @@ public class TransferController {
         return "addtransfer";
     }
 
-
+    /**
+     * handler method to handle showing the transfers owned by the currently logged-in user
+     * @param model
+     * @return transfers page
+     */
     @GetMapping("/transfers")
     public String findUserTransfers(Model model){
         //getting the context of the currently logged-in user
@@ -57,30 +61,39 @@ public class TransferController {
         model.addAttribute("transfers", transfers);
         return "transfers";
     }
+
+    /**
+     * handler method to handle showing all the transfers in the database
+     * @param model
+     * @return
+     */
     @GetMapping("/transfers/all")
     public String findTransfers(Model model){
-        //getting the context of the currently logged-in user
-        SecurityContext context = SecurityContextHolder.getContext();
-        UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
-        model.addAttribute("user", userDto);
         List<TransferDto> transfers = transferService.findAll();
         model.addAttribute("transfers", transfers);
         return "transfers";
     }
 
+    /**
+     * handler method for saving a new transfer in the database
+     * @param transferDto
+     * @param result
+     * @param model
+     * @return addtransfer page
+     */
+
     @PostMapping("/addtransfer/save")
     public String saveTransfer(@ModelAttribute("transfer") TransferDto transferDto, BindingResult result, Model model){
+
         System.out.println(transferDto.getValue());
         System.out.println(transferDto.getIsRecurring());
         System.out.println(transferDto.getCategory());
-        //checking if the user provided all the necessary credentials
 
+        //checking if the user provided all the necessary credentials
         if(transferDto.getValue() == 0.0 || transferDto.getCategory() == null) {
             result.rejectValue("value", null,
                     "default error message");
         }
-        //checking if the user already exists in the database
-
         //checking if the result of the action has errors
         if(result.hasErrors()){
             model.addAttribute("transfer", transferDto);
@@ -91,10 +104,8 @@ public class TransferController {
         SecurityContext context = SecurityContextHolder.getContext();
         //using the context to retrive the email of the currently logged-in user
         User user = userService.findUserByEmail(context.getAuthentication().getName());
-
+        //setting the current user as the owner of the transfer
         transferDto.setUser(user);
-
-
         //saving the transfer in the database
         transferService.saveTransfer(transferDto);
 
