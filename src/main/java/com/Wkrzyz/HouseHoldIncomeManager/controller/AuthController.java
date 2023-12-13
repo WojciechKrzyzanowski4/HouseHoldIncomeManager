@@ -67,6 +67,13 @@ public class AuthController {
         return "users";
     }
 
+    @GetMapping("/mainPage")
+    public String mainPage(Model model){
+        List<UserDto> users = userService.findAllUsers();
+        model.addAttribute("users", users);
+        return "mainPage";
+    }
+
 
     /**
      * this function is an example how to get the data regarding the currently logged-in user

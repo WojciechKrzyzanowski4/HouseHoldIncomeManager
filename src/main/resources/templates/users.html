@@ -39,6 +39,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Add transfers</th>
         </tr>
         </thead>
         <tbody>
@@ -46,6 +47,10 @@
             <td th:text = "${user.id}"></td>
             <td th:text = "${user.name}"></td>
             <td th:text = "${user.email}"></td>
+            <td>
+                <!--this works-->
+                <a class="btn btn-outline-dark" aria-current="page" th:href="@{/addtransfer?id={idu}(idu=${user.id})}">ADD</a>
+            </td>
         </tr>
         </tbody>
     </table>

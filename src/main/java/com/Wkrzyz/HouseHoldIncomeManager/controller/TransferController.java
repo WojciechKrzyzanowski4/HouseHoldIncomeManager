@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashSet;
 import java.util.List;
@@ -37,7 +38,9 @@ public class TransferController {
      * @return addtranfer page
      */
     @GetMapping("/addtransfer")
-    public String addTransfer(Model model){
+    public String addTransfer(Model model, @RequestParam String id){
+
+        model.addAttribute("currId", id);
         TransferDto transfer = new TransferDto();
         transfer.setValue(0);
         model.addAttribute("transfer", transfer);
@@ -83,7 +86,7 @@ public class TransferController {
      */
 
     @PostMapping("/addtransfer/save")
-    public String saveTransfer(@ModelAttribute("transfer") TransferDto transferDto, BindingResult result, Model model){
+    public String saveTransfer(@ModelAttribute("transfer") TransferDto transferDto, BindingResult result, Model model,  @RequestParam String id){
 
         System.out.println(transferDto.getValue());
         System.out.println(transferDto.getIsRecurring());
@@ -97,19 +100,25 @@ public class TransferController {
         //checking if the result of the action has errors
         if(result.hasErrors()){
             model.addAttribute("transfer", transferDto);
-            return "redirect:/addtransfer?failure";
+            return "redirect:/addtransfer?failure&id=" + id;
         }
 
-        //getting the context of the currently logged-in user
-        SecurityContext context = SecurityContextHolder.getContext();
-        //using the context to retrive the email of the currently logged-in user
-        User user = userService.findUserByEmail(context.getAuthentication().getName());
-        //setting the current user as the owner of the transfer
-        transferDto.setUser(user);
-        //saving the transfer in the database
-        transferService.saveTransfer(transferDto);
+        try{
 
-        return "redirect:/addtransfer?success";
+            Integer uId = Integer.parseInt(id);
+            User user = userService.findUserById(uId);
+            //setting the current user as the owner of the transfer
+            transferDto.setUser(user);
+            //saving the transfer in the database
+            transferService.saveTransfer(transferDto);
+
+            return "redirect:/addtransfer?success&id=" + id;
+
+        } catch(NumberFormatException e) {
+
+            model.addAttribute("transfer", transferDto);
+            return "redirect:/addtransfer?failure&id=" + id;
+
+        }
     }
-
 }

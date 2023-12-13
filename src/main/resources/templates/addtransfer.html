@@ -48,8 +48,9 @@
                 <form
                         method="post"
                         role="form"
-                        th:action="@{/addtransfer/save}"
+                        th:action="@{/addtransfer/save?id={idu}(idu=${currId})}"
                         th:object="${transfer}"
+
                 >
 
                     <div class="form-group mb-3">
@@ -92,6 +93,9 @@
 
                     <div class="form-group">
                         <button class="button" type="submit">Add transfer</button>
+                    </div>
+                    <div class="form-group">
+                        <a class="button" type="submit" th:href="@{/users}">Back to users</a>
                     </div>
                 </form>
 
