@@ -115,6 +115,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Add transfers</th>
+                <th>User transfers</th>
             </tr>
             </thead>
             <tbody>
@@ -125,6 +126,10 @@
                 <td>
                     <!--this works-->
                     <a class="btn btn-outline-dark" aria-current="page" th:href="@{/addtransfer?id={idu}(idu=${user.id})}">ADD</a>
+                </td>
+                <td>
+                    <!--this works-->
+                    <a class="btn btn-outline-dark" aria-current="page" th:href="@{/transfers?userId={idc}(idc=${user.id})}">VIEW</a>
                 </td>
             </tr>
             </tbody>

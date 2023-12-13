@@ -7,6 +7,7 @@ import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.security.core.context.SecurityContext;
@@ -53,16 +54,29 @@ public class TransferController {
      * @return transfers page
      */
     @GetMapping("/transfers")
-    public String findUserTransfers(Model model){
-        //getting the context of the currently logged-in user
-        SecurityContext context = SecurityContextHolder.getContext();
-        //using the context to retrive the email of the currently logged-in user
-        UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
-        model.addAttribute("user", userDto);
-        //List<Transfer> transfers = user.getUserTransfers();
-        List<TransferDto> transfers = transferService.findAllByOwner(userDto.getId());
-        model.addAttribute("transfers", transfers);
+    public String findUserTransfers(Model model, @RequestParam String userId){
+
+        System.out.println(userId);
+        model.addAttribute("currId", userId);
+
+        try{
+            Integer uId = Integer.parseInt(userId);
+            User user = userService.findUserById(uId);
+            List<TransferDto> transfers = transferService.findAllByOwner(uId);
+            model.addAttribute("transfers", transfers);
+            model.addAttribute("user", user);
+
+        }
+        catch(NumberFormatException e){
+
+            User user = new User();
+            user.setName("you did something very wrong");
+            model.addAttribute("user", user);
+
+        }
+
         return "transfers";
+
     }
 
     /**
@@ -88,10 +102,6 @@ public class TransferController {
     @PostMapping("/addtransfer/save")
     public String saveTransfer(@ModelAttribute("transfer") TransferDto transferDto, BindingResult result, Model model,  @RequestParam String id){
 
-        System.out.println(transferDto.getValue());
-        System.out.println(transferDto.getIsRecurring());
-        System.out.println(transferDto.getCategory());
-
         //checking if the user provided all the necessary credentials
         if(transferDto.getValue() == 0.0 || transferDto.getCategory() == null) {
             result.rejectValue("value", null,
@@ -102,23 +112,19 @@ public class TransferController {
             model.addAttribute("transfer", transferDto);
             return "redirect:/addtransfer?failure&id=" + id;
         }
-
+        //trying to parse the passed in string
         try{
-
             Integer uId = Integer.parseInt(id);
             User user = userService.findUserById(uId);
-            //setting the current user as the owner of the transfer
+            //setting the found user as the owner of the transfer
             transferDto.setUser(user);
             //saving the transfer in the database
             transferService.saveTransfer(transferDto);
-
             return "redirect:/addtransfer?success&id=" + id;
-
-        } catch(NumberFormatException e) {
-
+        }
+        catch(NumberFormatException e) {
             model.addAttribute("transfer", transferDto);
             return "redirect:/addtransfer?failure&id=" + id;
-
         }
     }
 }
