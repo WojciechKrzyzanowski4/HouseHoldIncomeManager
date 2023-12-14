@@ -130,6 +130,10 @@ public class AuthController {
         roles.add(Role.ADMIN);
         userDto.setRoles(roles);
 
+
+        //creating the group object
+        //setting the list of users with the first object which will also be the groups admin user
+
         //saving the user in the database
         userService.saveUser(userDto);
         return "redirect:/register?success";

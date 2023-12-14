@@ -9,7 +9,6 @@ import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -35,12 +33,13 @@ public class TransferController {
     private TransferService transferService;
 
     /** handler method to handle adding a new transfer
-     *
+     * @param model
+     * @param id
      * @return addtranfer page
      */
     @GetMapping("/addtransfer")
     public String addTransfer(Model model, @RequestParam String id){
-
+        //adding the current id as a model attribute
         model.addAttribute("currId", id);
         TransferDto transfer = new TransferDto();
         transfer.setValue(0);
@@ -51,24 +50,38 @@ public class TransferController {
     /**
      * handler method to handle showing the transfers owned by the currently logged-in user
      * @param model
+     * @param userId
      * @return transfers page
      */
     @GetMapping("/transfers")
-    public String findUserTransfers(Model model, @RequestParam String userId){
+    public String findUserTransfers(Model model, @RequestParam(required = false) String userId){
 
         System.out.println(userId);
+        //adding the current id as a model attribute
         model.addAttribute("currId", userId);
 
         try{
+            //trying to parse the id
             Integer uId = Integer.parseInt(userId);
             User user = userService.findUserById(uId);
-            List<TransferDto> transfers = transferService.findAllByOwner(uId);
-            model.addAttribute("transfers", transfers);
-            model.addAttribute("user", user);
 
+            if(user.equals(null)){
+                //if the id does not exist we display a fabricated error page
+                User userTemp = new User();
+                user.setName("you did something very wrong");
+                model.addAttribute("user", userTemp);
+
+            }
+            else{
+                //we find and display all the transfers associated with the user
+                List<TransferDto> transfers = transferService.findAllByOwner(uId);
+                model.addAttribute("transfers", transfers);
+                model.addAttribute("user", user);
+
+            }
         }
         catch(NumberFormatException e){
-
+            //if the id was not provided in the appropriate format we also display a fabricated error page
             User user = new User();
             user.setName("you did something very wrong");
             model.addAttribute("user", user);
@@ -96,6 +109,7 @@ public class TransferController {
      * @param transferDto
      * @param result
      * @param model
+     * @param id
      * @return addtransfer page
      */
 
@@ -112,7 +126,7 @@ public class TransferController {
             model.addAttribute("transfer", transferDto);
             return "redirect:/addtransfer?failure&id=" + id;
         }
-        //trying to parse the passed in string
+        //trying to parse the passed in ID string
         try{
             Integer uId = Integer.parseInt(id);
             User user = userService.findUserById(uId);
@@ -120,9 +134,11 @@ public class TransferController {
             transferDto.setUser(user);
             //saving the transfer in the database
             transferService.saveTransfer(transferDto);
+            //redirecting to the default successful URL
             return "redirect:/addtransfer?success&id=" + id;
         }
         catch(NumberFormatException e) {
+            //redirecting to the default unsuccessful URL
             model.addAttribute("transfer", transferDto);
             return "redirect:/addtransfer?failure&id=" + id;
         }

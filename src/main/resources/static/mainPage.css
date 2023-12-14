@@ -1,0 +1,35 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+#sidebar {
+    height: 100vh;
+    position: fixed;
+    width: 80px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding-top: 150px;
+    background-color: #454545;
+    color: #fff;
+}
+
+#ciulbar{
+    height: 80px;
+}
+
+#sidebar .nav-link {
+    color: #d1d1d1;
+}
+
+#sidebar .nav-link:hover {
+    color: #fff;
+    background-color: #495057;
+}
+
+#content {
+    margin-top: 56px; /* Adjust this value based on your top navbar height */
+    margin-left: 150px;
+    padding: 20px;
+}

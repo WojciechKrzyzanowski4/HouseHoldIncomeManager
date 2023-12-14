@@ -9,58 +9,16 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
-    <link href="users.css" rel="stylesheet">
+    <link href="mainPage.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-        }
-
-        #sidebar {
-            height: 100vh;
-            position: fixed;
-            width: 80px;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            padding-top: 150px;
-            background-color: #454545;
-            color: #fff;
-        }
-
-        #ciulbar{
-            height: 80px;
-        }
-
-        #sidebar .nav-link {
-            color: #d1d1d1;
-        }
-
-        #sidebar .nav-link:hover {
-            color: #fff;
-            background-color: #495057;
-        }
-
-        #content {
-            margin-top: 56px; /* Adjust this value based on your top navbar height */
-            margin-left: 150px;
-            padding: 20px;
-        }
-
-
-
-    </style>
+    <script src="mainPage.js"></script>
 </head>
-<body>
+<body onload = "showStoredContent()">
 
 <!-- Top Navbar -->
 <nav id="ciulbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/home}">Hh Income Manager</a>
+        <a class="navbar-brand" th:href="@{/mainPage}">Hh Income Manager</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -74,37 +32,34 @@
     </div>
 </nav>
 
-<!-- Sidebar -->
-<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark ">
+
+<!-- Add a data-section attribute to each sidebar item to identify the section -->
+<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark">
     <div class="position-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="#">
-                    Manage
-                </a>
+                <a class="nav-link active" href="#" onclick="showContent('manage')">Group</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    Users
-                </a>
+                <a class="nav-link active" href="#" onclick="showContent('users')">Users</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    Options
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    Logout
-                </a>
+                <a class="nav-link active" href="#" onclick="showContent('options')">Options</a>
             </li>
         </ul>
     </div>
 </nav>
 
-<!-- Main content area -->
+
+<<!-- Add different sections with unique IDs -->
 <div id="content">
-    <div class="container">
+    <div id="manage" class="container">
+        <!-- group content area -->
+        <h2>Group Section</h2>
+
+    </div>
+    <div id="users" class="container">
+        <!-- users content area -->
         <div class="row col-md-10" >
             <h2>List of Registered Users</h2>
         </div>
@@ -135,7 +90,15 @@
             </tbody>
         </table>
     </div>
+    <div id="options" class="container">
+        <div class="row col-md-10" >
+            <!-- Options content area -->
+            <h2>Options section</h2>
+
+        </div>
+    </div>
 </div>
+
 
 <!-- Bootstrap JS bundle (required for some Bootstrap components) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
