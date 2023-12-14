@@ -67,12 +67,6 @@ public class AuthController {
         return "users";
     }
 
-    @GetMapping("/mainPage")
-    public String mainPage(Model model){
-        List<UserDto> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "mainPage";
-    }
 
 
     /**
