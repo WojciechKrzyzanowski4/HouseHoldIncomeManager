@@ -105,13 +105,16 @@ public class AuthController {
                                BindingResult result,
                                Model model){
 
+
+
+        System.out.println(userDto.getEmail());
         //checking if the user provided all the necessary credentials
         if(userDto.getEmail().equals("") || userDto.getPassword().equals("") || userDto.getName().equals("")){
             result.rejectValue("email", null,
                     "default error message");
         }
         //checking if the user already exists in the database
-        UserDto existingUser = userService.findUserDtoByEmail(userDto.getEmail());
+        User existingUser = userService.findUserByEmail(userDto.getEmail());
 
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
