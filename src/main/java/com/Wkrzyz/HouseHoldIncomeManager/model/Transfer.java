@@ -23,7 +23,7 @@ public class Transfer {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "userGroup_id")
+    @JoinColumn(name = "user_group_id")
     private UserGroup userGroup;
 
 

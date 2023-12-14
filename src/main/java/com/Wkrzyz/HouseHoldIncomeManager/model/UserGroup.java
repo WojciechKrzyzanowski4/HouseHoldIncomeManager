@@ -16,9 +16,6 @@ public class UserGroup {
 
     private Float balance;
 
-    @OneToOne
-    private User adminUser;
-
     @OneToMany(mappedBy = "userGroup", cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
 
@@ -29,11 +26,10 @@ public class UserGroup {
     public UserGroup(){
 
     }
-    public UserGroup(Integer id, String name, Float balance, User adminUser, List<User> users, List<Transfer> userGroupTransfers) {
+    public UserGroup(Integer id, String name, Float balance, List<User> users, List<Transfer> userGroupTransfers) {
         this.id = id;
         this.name = name;
         this.balance = balance;
-        this.adminUser = adminUser;
         this.users = users;
         this.userGroupTransfers = userGroupTransfers;
     }
@@ -60,14 +56,6 @@ public class UserGroup {
 
     public void setBalance(Float balance) {
         balance = balance;
-    }
-
-    public User getAdminUser() {
-        return adminUser;
-    }
-
-    public void setAdminUser(User adminUser) {
-        this.adminUser = adminUser;
     }
 
     public List<User> getUsers() {

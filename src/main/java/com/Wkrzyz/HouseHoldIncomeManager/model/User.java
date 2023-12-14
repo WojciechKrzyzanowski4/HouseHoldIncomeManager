@@ -29,7 +29,7 @@ public class User {
     private List<Transfer> userTransfers = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "userGroup_id")
+    @JoinColumn(name = "user_group_id")
     private UserGroup userGroup;
 
 
