@@ -1,15 +1,14 @@
-package com.Wkrzyz.HouseHoldIncomeManager.model;
+package com.Wkrzyz.HouseHoldIncomeManager.model.dto;
 
-import jakarta.persistence.*;
+import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
+import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class UserGroup {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class UserGroupDto {
+
     private Integer id;
 
     private String name;
@@ -18,17 +17,16 @@ public class UserGroup {
 
     private Integer adminId;
 
-    @OneToMany(mappedBy = "userGroup", cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userGroup", cascade = CascadeType.ALL)
+
     private List<Transfer> userGroupTransfers = new ArrayList<>();
 
 
-    public UserGroup(){
+    public UserGroupDto(){
 
     }
-    public UserGroup(Integer id, String name, Float balance, Integer adminId, List<User> users, List<Transfer> userGroupTransfers) {
+    public UserGroupDto(Integer id, String name, Float balance, Integer adminId, List<User> users, List<Transfer> userGroupTransfers) {
         this.id = id;
         this.name = name;
         this.balance = balance;
@@ -58,7 +56,7 @@ public class UserGroup {
     }
 
     public void setBalance(Float balance) {
-        balance = balance;
+        this.balance = balance;
     }
 
     public List<User> getUsers() {

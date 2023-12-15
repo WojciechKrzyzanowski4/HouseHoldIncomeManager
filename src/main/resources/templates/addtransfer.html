@@ -54,7 +54,7 @@
                 >
 
                     <div class="form-group mb-3">
-                        <label class="form-label">Name</label>
+                        <label class="form-label">Provide a value for your transfer:</label>
                         <input
                                 class="form-control"
                                 id="value"
@@ -68,25 +68,85 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label>
-                            <input type="radio" th:field="*{category}" th:value="${'BILLS'}" /> Bills
-                        </label>
-                        <label>
-                            <input type="radio" th:field="*{category}" th:value="${'FOOD'}" /> Food
-                        </label>
-                        <label>
-                            <input type="radio" th:field="*{category}" th:value="${'INSURANCES'}" /> Insurances
-                        </label>
+                        <label class="form-label">Select the category of your transfer:</label>
+                        <div class="radio-grid">
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'BILLS'}" /> Bills
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'FOOD'}" /> Food
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'INSURANCES'}" /> Insurances
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'TRANSPORT'}" /> Transport
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'HEALTHCARE'}" /> Healthcare
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'ENTERTAINMENT'}" /> Entertainment
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'TAXES'}" /> Taxes
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'GIFT'}" /> Gift
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'BONUS'}" /> Bonus
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'WORK_INCOME'}" /> Work Income
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'CURRENT_EXPENSES'}" /> Current expenses
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'ALLOWANCE'}" /> Allowance
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'OTHER'}" /> Other
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group mb-3">
+                        <label class="form-label">Select this checkbox if the transfer is recurring</label>
 
                         <input
                                 type="checkbox"
                                 th:field="*{isRecurring}"
                         />
 
-                        <label class="form-label">Monthly</label>
+                        <label class="form-label">Monthly.</label>
                     </div>
 
                     <div class="form-group">

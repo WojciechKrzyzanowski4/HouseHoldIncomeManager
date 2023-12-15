@@ -4,7 +4,9 @@ import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
+import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserGroupDto;
 import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
+import com.Wkrzyz.HouseHoldIncomeManager.services.UserGroupService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
@@ -27,6 +29,9 @@ public class AuthController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserGroupService userGroupService;
     /** handler method to handle home page request
      *
      * @return home page
@@ -124,12 +129,14 @@ public class AuthController {
         roles.add(Role.ADMIN);
         userDto.setRoles(roles);
 
-
-        //creating the group object
-        //setting the list of users with the first object which will also be the groups admin user
+        UserGroupDto userGroupDto = new UserGroupDto();
+        userGroupDto.setName(userDto.getName()+"'s group");
+        userGroupDto.setAdminId(userDto.getId());
 
         //saving the user in the database
         userService.saveUser(userDto);
+        userGroupService.saveGroup(userGroupDto);
+
         return "redirect:/register?success";
     }
 }
