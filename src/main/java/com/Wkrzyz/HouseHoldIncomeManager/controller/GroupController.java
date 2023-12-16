@@ -79,7 +79,7 @@ public class GroupController {
                                 BindingResult result,
                                 Model model){
 
-        System.out.println(userDto.getEmail());
+
         //checking if the user provided all the necessary credentials
         if(userDto.getEmail().equals("") || userDto.getPassword().equals("") || userDto.getName().equals("")){
             result.rejectValue("email", null,

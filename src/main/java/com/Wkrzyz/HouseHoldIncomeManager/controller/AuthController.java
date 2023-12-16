@@ -84,6 +84,7 @@ public class AuthController {
         //getting the context of the currently logged-in user
         SecurityContext context = SecurityContextHolder.getContext();
         //using the context to retrive the email of the currently logged-in user
+        System.out.println(context.getAuthentication().getName());
         UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
         Set<Role> roles = userDto.getRoles();
         for(Role r : roles){

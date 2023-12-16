@@ -34,8 +34,9 @@ public class SpringSecurity {
                                 .requestMatchers("/users").authenticated()
                                 .requestMatchers("/transfers").authenticated()
                                 .requestMatchers("/addtransfer").authenticated()
+                                .requestMatchers("/adduser").authenticated()
                                 .requestMatchers("/mainPage").hasRole("ADMIN")
-                                .requestMatchers("/adminPage").hasRole("ADMIN")
+                                .requestMatchers("/adminPage").hasAnyRole("USER","ADMIN")
                                 .anyRequest().permitAll()
 
                 ).formLogin(

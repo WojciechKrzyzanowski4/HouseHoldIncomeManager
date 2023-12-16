@@ -62,7 +62,7 @@ public class TransferController {
     @GetMapping("/transfers")
     public String findUserTransfers(Model model, @RequestParam(required = false) String userId){
 
-        System.out.println(userId);
+        //System.out.println(userId);
         //adding the current id as a model attribute
         model.addAttribute("currId", userId);
 

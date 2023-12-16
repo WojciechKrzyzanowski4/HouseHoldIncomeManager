@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     'rgba(255, 206, 86, 0.8)',
                     // Add more colors as needed
                 ],
-                borderColor: 'rgba(255, 255, 255, 1)', // Border color
+                borderColor: 'rgba(0, 0, 0, 1)', // Border color
                 borderWidth: 1
             }]
         },
