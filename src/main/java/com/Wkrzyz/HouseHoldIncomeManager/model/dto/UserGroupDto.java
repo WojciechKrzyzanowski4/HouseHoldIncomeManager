@@ -15,7 +15,7 @@ public class UserGroupDto {
 
     private Float balance;
 
-    private Integer adminId;
+    private String admin;
 
     private List<User> users = new ArrayList<>();
 
@@ -26,11 +26,11 @@ public class UserGroupDto {
     public UserGroupDto(){
 
     }
-    public UserGroupDto(Integer id, String name, Float balance, Integer adminId, List<User> users, List<Transfer> userGroupTransfers) {
+    public UserGroupDto(Integer id, String name, Float balance, String admin, List<User> users, List<Transfer> userGroupTransfers) {
         this.id = id;
         this.name = name;
         this.balance = balance;
-        this.adminId = adminId;
+        this.admin = admin;
         this.users = users;
         this.userGroupTransfers = userGroupTransfers;
     }
@@ -75,11 +75,11 @@ public class UserGroupDto {
         this.userGroupTransfers = userGroupTransfers;
     }
 
-    public Integer getAdminId() {
-        return adminId;
+    public String getAdmin() {
+        return admin;
     }
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 }

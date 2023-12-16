@@ -3,9 +3,12 @@ package com.Wkrzyz.HouseHoldIncomeManager.controller;
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
+import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
+import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserGroupDto;
 import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
+import com.Wkrzyz.HouseHoldIncomeManager.services.UserGroupService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ public class TransferController {
 
     @Autowired
     private TransferService transferService;
+
+    @Autowired
+    private UserGroupService userGroupService;
 
     /** handler method to handle adding a new transfer
      * @param model
@@ -74,6 +80,7 @@ public class TransferController {
             }
             else{
                 //we find and display all the transfers associated with the user
+                //UserGroup userGroup = userGroupService.findGroupByUser() itd
                 List<TransferDto> transfers = transferService.findAllByOwner(uId);
                 model.addAttribute("transfers", transfers);
                 model.addAttribute("user", user);

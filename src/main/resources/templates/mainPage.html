@@ -56,13 +56,18 @@
     <div id="manage" class="container">
         <!-- group content area -->
         <h2>Group Section</h2>
-        <a class="nav-link active" aria-current="page" th:href="@{/adduser}">Add new users to your group</a>
+        <h2 th:text = "${userGroup.name}"> is the name of the group</h2>
+
+        <div>
+            <a class="btn btn-outline-dark" aria-current="page" th:href="@{/adduser}">Add new users to your group</a>
+        </div>
+
 
     </div>
     <div id="users" class="container">
         <!-- users content area -->
         <div class="row col-md-10" >
-            <h2>List of Registered Users</h2>
+            <h2>List of Users in Your HouseHold</h2>
         </div>
         <table class="table table-bordered table-hover" id="data-table">
             <thead class="table-dark">

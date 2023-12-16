@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface UserGroupRepository extends CrudRepository<UserGroup, Integer> {
 
+    UserGroup findByAdmin(String admin);
+
 }

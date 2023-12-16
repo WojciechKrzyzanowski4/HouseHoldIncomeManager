@@ -6,8 +6,12 @@ import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserGroupDto;
 
 public interface UserGroupService {
 
-    UserGroup findGroupByUser(Integer id);
+    UserGroup findGroupByAdmin(String admin);
 
     void saveGroup(UserGroupDto userGroupDto);
+
+    UserGroupDto findGroupDtoByAdmin(String admin);
+
+    UserGroupDto findGroupDtoById(Integer id);
 
 }

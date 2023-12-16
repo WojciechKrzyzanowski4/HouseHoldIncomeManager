@@ -2,6 +2,7 @@ package com.Wkrzyz.HouseHoldIncomeManager.controller;
 
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
+import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserGroupDto;
@@ -98,6 +99,7 @@ public class AuthController {
      * @param userDto
      * @param result
      * @param model
+     * @return register page
      * */
     @PostMapping("/register/save")
     public String registration( @ModelAttribute("user") UserDto userDto,
@@ -128,14 +130,17 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
         roles.add(Role.ADMIN);
         userDto.setRoles(roles);
-
+        //creating the admin user's group
         UserGroupDto userGroupDto = new UserGroupDto();
         userGroupDto.setName(userDto.getName()+"'s group");
-        userGroupDto.setAdminId(userDto.getId());
-
-        //saving the user in the database
-        userService.saveUser(userDto);
+        userGroupDto.setAdmin(userDto.getEmail());
+        //saving the group in the database
         userGroupService.saveGroup(userGroupDto);
+        //setting the admin to be a part of the group
+        UserGroup userGroup = userGroupService.findGroupByAdmin(userDto.getEmail());
+        userDto.setUserGroup(userGroup);
+        //saving the admin in the database
+        userService.saveUser(userDto);
 
         return "redirect:/register?success";
     }

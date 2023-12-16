@@ -22,18 +22,42 @@ public class UserGroupServiceImpl implements UserGroupService {
         this.userGroupRepository = userGroupRepository;
     }
     @Override
-    public UserGroup findGroupByUser(Integer id){
-        return userGroupRepository.findById(id).get();
+    public UserGroup findGroupByAdmin(String admin){
+        return userGroupRepository.findByAdmin(admin);
     }
     @Override
     public void saveGroup(UserGroupDto userGroupDto){
-
         UserGroup userGroup = new UserGroup();
-
         userGroup.setId(userGroupDto.getId());
         userGroup.setName(userGroupDto.getName());
-
+        userGroup.setAdmin(userGroupDto.getAdmin());
+        userGroup.setUsers(userGroupDto.getUsers());
+        userGroup.setUserGroupTransfers(userGroupDto.getUserGroupTransfers());
         userGroupRepository.save(userGroup);
+    }
+
+    @Override
+    public UserGroupDto findGroupDtoByAdmin(String admin) {
+        UserGroup userGroup = userGroupRepository.findByAdmin(admin);
+        return mapUserGroupDto(userGroup);
+    }
+
+    @Override
+    public UserGroupDto findGroupDtoById(Integer id) {
+        UserGroup userGroup = userGroupRepository.findById(id).get();
+        return mapUserGroupDto(userGroup);
+    }
+
+    private UserGroupDto mapUserGroupDto(UserGroup userGroup){
+
+        UserGroupDto userGroupDto = new UserGroupDto();
+        userGroupDto.setAdmin(userGroup.getAdmin());
+        userGroupDto.setId(userGroup.getId());
+        userGroupDto.setName(userGroup.getName());
+        userGroupDto.setUsers(userGroup.getUsers());
+        userGroupDto.setUserGroupTransfers(userGroup.getUserGroupTransfers());
+
+        return userGroupDto;
 
     }
 }
