@@ -45,6 +45,17 @@ public class TransferController {
      */
     @GetMapping("/addtransfer")
     public String addTransfer(Model model, @RequestParam String id){
+
+        try {
+            //trying to parse the id
+            Integer superId = Integer.parseInt(id);
+            User user = userService.findUserById(superId);
+
+        } catch (NumberFormatException | NoSuchElementException e) {
+
+            throw new InvalidUserIdFormatException();
+        }
+
         //adding the current id as a model attribute
         model.addAttribute("currId", id);
         TransferDto transfer = new TransferDto();
