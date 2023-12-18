@@ -1,0 +1,29 @@
+body{
+    background-color:white;
+    background-size: 100% 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.row{
+    padding-top: 12%;
+
+}
+.card{
+    background-color: red;
+    border-radius: 20px;
+    border-color: black;
+}
+h2{
+    color:black;
+    font-size: 30px;
+    border-color: transparent;
+}
+
+span{
+    color: black;
+}
+
+
+
+

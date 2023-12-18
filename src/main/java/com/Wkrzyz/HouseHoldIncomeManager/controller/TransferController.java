@@ -1,6 +1,7 @@
 package com.Wkrzyz.HouseHoldIncomeManager.controller;
 
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
+import com.Wkrzyz.HouseHoldIncomeManager.exception.InvalidUserIdFormatException;
 import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
@@ -12,17 +13,16 @@ import com.Wkrzyz.HouseHoldIncomeManager.services.UserGroupService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Controller
@@ -60,40 +60,33 @@ public class TransferController {
      * @return transfers page
      */
     @GetMapping("/transfers")
-    public String findUserTransfers(Model model, @RequestParam(required = false) String userId){
+    public String findUserTransfers(Model model, @RequestParam(required = false) String userId) {
 
         //System.out.println(userId);
         //adding the current id as a model attribute
         model.addAttribute("currId", userId);
+        Integer uId = 0;
+        try {
+            //trying to parse the id
+            uId = Integer.parseInt(userId);
+
+        } catch (NumberFormatException e) {
+
+            throw new InvalidUserIdFormatException();
+        }
+
 
         try{
-            //trying to parse the id
-            Integer uId = Integer.parseInt(userId);
             User user = userService.findUserById(uId);
-
-            if(user.equals(null)){
-                //if the id does not exist we display a fabricated error page
-                User userTemp = new User();
-                user.setName("you did something very wrong");
-                model.addAttribute("user", userTemp);
-
-            }
-            else{
-                //we find and display all the transfers associated with the user
-                //UserGroup userGroup = userGroupService.findGroupByUser() itd
-                List<TransferDto> transfers = transferService.findAllByOwner(uId);
-                model.addAttribute("transfers", transfers);
-                model.addAttribute("user", user);
-
-            }
-        }
-        catch(NumberFormatException e){
-            //if the id was not provided in the appropriate format we also display a fabricated error page
-            User user = new User();
-            user.setName("you did something very wrong");
+            List<TransferDto> transfers = transferService.findAllByOwner(uId);
+            model.addAttribute("transfers", transfers);
             model.addAttribute("user", user);
 
+        }catch(NoSuchElementException e){
+            throw new InvalidUserIdFormatException();
         }
+
+
 
         return "transfers";
 
@@ -150,4 +143,16 @@ public class TransferController {
             return "redirect:/addtransfer?failure&id=" + id;
         }
     }
+
+    @ExceptionHandler(InvalidUserIdFormatException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleInvalidUserIdFormatException(Model model) {
+        User user = new User();
+        user.setName("The format of the Id in the http request in not Correct");
+        model.addAttribute("user", user);
+        return "error"; // This points to the error.html template
+    }
+
+
+
 }
