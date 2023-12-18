@@ -88,10 +88,10 @@ public class TransferController {
 
 
         try{
-            User user = userService.findUserById(uId);
+            UserDto userDto = userService.findUserDtoById(uId);
             List<TransferDto> transfers = transferService.findAllByOwner(uId);
             model.addAttribute("transfers", transfers);
-            model.addAttribute("user", user);
+            model.addAttribute("user", userDto);
 
         }catch(NoSuchElementException e){
             throw new InvalidUserIdFormatException();

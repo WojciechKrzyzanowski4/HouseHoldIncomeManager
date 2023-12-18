@@ -60,6 +60,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto findUserDtoById(Integer id) {
+        User user = userRepository.findById(id).get();
+        return mapToUserDto(user);
+    }
+
+    @Override
     public List<UserDto> findAllUsers() {
         List<User> users = (List<User>) userRepository.findAll();
         return users.stream()
