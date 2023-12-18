@@ -147,9 +147,8 @@ public class TransferController {
     @ExceptionHandler(InvalidUserIdFormatException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleInvalidUserIdFormatException(Model model) {
-        User user = new User();
-        user.setName("The format of the Id in the http request in not Correct");
-        model.addAttribute("user", user);
+        String message = "The format of the Id in the http request in not Correct";
+        model.addAttribute("message", message);
         return "error"; // This points to the error.html template
     }
 
