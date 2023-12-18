@@ -28,7 +28,6 @@ public class UserGroupServiceImpl implements UserGroupService {
     @Override
     public void saveGroup(UserGroupDto userGroupDto){
         UserGroup userGroup = new UserGroup();
-        userGroup.setId(userGroupDto.getId());
         userGroup.setName(userGroupDto.getName());
         userGroup.setAdmin(userGroupDto.getAdmin());
         userGroup.setUsers(userGroupDto.getUsers());

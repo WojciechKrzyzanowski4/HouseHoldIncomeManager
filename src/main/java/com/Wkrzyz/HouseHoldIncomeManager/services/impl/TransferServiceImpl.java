@@ -31,7 +31,6 @@ public class TransferServiceImpl implements TransferService {
 
         transfer.setCategory(transferDto.getCategory());
         transfer.setUser(transferDto.getUser());
-        transfer.setId(transferDto.getId());
         transfer.setValue(transferDto.getValue());
         transfer.setIsRecurring(transferDto.getIsRecurring());
 
