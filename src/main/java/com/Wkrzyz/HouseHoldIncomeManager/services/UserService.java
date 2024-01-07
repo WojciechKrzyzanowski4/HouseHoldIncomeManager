@@ -14,6 +14,8 @@ public interface UserService {
 
     User findUserById(Integer id);
 
+    UserDto findUserDtoById(Integer id);
+
     List<UserDto> findAllUsers();
 
 }
