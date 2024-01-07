@@ -11,6 +11,7 @@ import com.Wkrzyz.HouseHoldIncomeManager.services.UserGroupService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -75,10 +76,7 @@ public class AuthController {
 
 
 
-    /**
-     * this function is an example how to get the data regarding the currently logged-in user
-     * @return _core page
-     * */
+
     @GetMapping("/adminPage")
     public String testUser(Model model){
         //getting the context of the currently logged-in user

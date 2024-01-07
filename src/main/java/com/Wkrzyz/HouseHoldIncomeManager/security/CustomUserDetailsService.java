@@ -40,6 +40,12 @@ public class CustomUserDetailsService implements UserDetailsService {
                     //user.getPassword(),
                     //privileges);
 
+            //checking the user role
+            for(String i : user.getRoles().stream().map(Enum::name).toArray(String[]::new)){
+                System.out.println(i);
+            }
+
+
             return org.springframework.security.core.userdetails.User
                     .withUsername(user.getEmail())
                     .password(user.getPassword())

@@ -47,10 +47,21 @@ public class GroupController {
         //find the currently logged-in user
         SecurityContext context = SecurityContextHolder.getContext();
         UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
+
+        String role = "";
+        if(userDto.getRoles().contains(Role.ADMIN)){
+            role = "ROLE_ADMIN";
+        }else if(userDto.getRoles().contains(Role.USER)){
+            role = "ROLE_USER";
+        }else{
+            role = "ROLE_TINY";
+        }
+        model.addAttribute("userRole", role);
         //get his group
         UserGroupDto userGroupDto = userGroupService.findGroupDtoById(userDto.getUserGroup().getId());
         //get the list of users in said group
         List<User> users = userGroupDto.getUsers();
+
         //add the users to a table using thymeleaf
         model.addAttribute("users", users);
         //necessary data for the group displayed using thymeleaf
