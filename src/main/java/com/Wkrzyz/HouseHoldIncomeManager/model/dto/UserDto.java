@@ -91,7 +91,6 @@ public class UserDto {
         this.userTransfers = userTransfers;
     }
 
-
     public UserGroup getUserGroup() {
         return userGroup;
     }

@@ -8,6 +8,8 @@ public interface UserGroupService {
 
     UserGroup findGroupByAdmin(String admin);
 
+    UserGroup findGroupById(Integer id);
+
     void saveGroup(UserGroupDto userGroupDto);
 
     UserGroupDto findGroupDtoByAdmin(String admin);

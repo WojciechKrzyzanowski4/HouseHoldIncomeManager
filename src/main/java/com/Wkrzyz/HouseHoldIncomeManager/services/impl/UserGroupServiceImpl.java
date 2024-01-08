@@ -25,6 +25,12 @@ public class UserGroupServiceImpl implements UserGroupService {
     public UserGroup findGroupByAdmin(String admin){
         return userGroupRepository.findByAdmin(admin);
     }
+
+    @Override
+    public UserGroup findGroupById(Integer id) {
+        return userGroupRepository.findById(id).get();
+    }
+
     @Override
     public void saveGroup(UserGroupDto userGroupDto){
         UserGroup userGroup = new UserGroup();

@@ -32,6 +32,7 @@ public class TransferServiceImpl implements TransferService {
         transfer.setCategory(transferDto.getCategory());
         transfer.setUser(transferDto.getUser());
         transfer.setValue(transferDto.getValue());
+        transfer.setUserGroup(transferDto.getUserGroup());
         transfer.setIsRecurring(transferDto.getIsRecurring());
 
         transferRepository.save(transfer);
@@ -44,6 +45,8 @@ public class TransferServiceImpl implements TransferService {
                 .map((transfer) -> mapToTransferDto(transfer))
                 .collect(Collectors.toList());
     }
+
+
     @Override
     public List<TransferDto> findAll() {
         List<Transfer> databaseTransfers = (List<Transfer>)transferRepository.findAll();

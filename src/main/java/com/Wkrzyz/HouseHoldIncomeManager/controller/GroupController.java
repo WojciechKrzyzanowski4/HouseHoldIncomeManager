@@ -1,6 +1,7 @@
 package com.Wkrzyz.HouseHoldIncomeManager.controller;
 
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
+import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
@@ -30,8 +31,7 @@ public class GroupController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    TransferService transferService;
+
 
     @Autowired
     UserGroupService userGroupService;
@@ -59,11 +59,23 @@ public class GroupController {
         model.addAttribute("userRole", role);
         //get his group
         UserGroupDto userGroupDto = userGroupService.findGroupDtoById(userDto.getUserGroup().getId());
+        //the model still needs the group transfers
+
+        List<Transfer> transfers = userGroupDto.getUserGroupTransfers();
         //get the list of users in said group
         List<User> users = userGroupDto.getUsers();
 
+        for(User u : users ){
+            transfers.addAll(u.getUserTransfers());
+        }
+
+        //for each to add the transfers to get all of them
+
+
         //add the users to a table using thymeleaf
         model.addAttribute("users", users);
+        //add the transfers to a table using thymeleaf
+        model.addAttribute("transfers", transfers);
         //necessary data for the group displayed using thymeleaf
         model.addAttribute("userGroup", userGroupDto);
 

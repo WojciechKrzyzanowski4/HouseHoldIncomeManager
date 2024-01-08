@@ -3,6 +3,8 @@ package com.Wkrzyz.HouseHoldIncomeManager.model.dto;
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Category;
 import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
+import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
+
 /**
  * Data transfer Object for the Transfer class
  * It used transfer only the necessary fields in a given action
@@ -13,6 +15,7 @@ public class TransferDto {
     private double value;
     private Category category;
     private User user;
+    private UserGroup userGroup;
     private boolean isRecurring;
 
     public TransferDto() {
@@ -25,6 +28,7 @@ public class TransferDto {
         this.category = transfer.getCategory();
         this.user = transfer.getUser();
         this.isRecurring = transfer.getIsRecurring();
+
     }
 
     public Integer getId() {
@@ -66,4 +70,10 @@ public class TransferDto {
     public void setIsRecurring(boolean recurring) {
         isRecurring = recurring;
     }
+
+    public UserGroup getUserGroup(){return userGroup;}
+
+    public void setUserGroup(UserGroup userGroup){this.userGroup = userGroup;}
+
+
 }

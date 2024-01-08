@@ -78,15 +78,10 @@ public class TransferController {
         model.addAttribute("currId", userId);
         Integer uId = 0;
         try {
-            //trying to parse the id
             uId = Integer.parseInt(userId);
-
         } catch (NumberFormatException e) {
-
             throw new InvalidUserIdFormatException();
         }
-
-
         try{
             UserDto userDto = userService.findUserDtoById(uId);
             List<TransferDto> transfers = transferService.findAllByOwner(uId);
@@ -153,6 +148,42 @@ public class TransferController {
             model.addAttribute("transfer", transferDto);
             return "redirect:/addtransfer?failure&id=" + id;
         }
+    }
+    @GetMapping("/addGroupTransfer")
+    public String addGroupTransfer(Model model){
+        TransferDto transfer = new TransferDto();
+        transfer.setValue(0);
+        model.addAttribute("transfer", transfer);
+        return "addGroupTransfer";
+    }
+    @PostMapping("/addGroupTransfer/save")
+    public String saveGroupTransfer(@ModelAttribute("transfer") TransferDto transferDto, BindingResult result, Model model){
+
+        //checking if the user provided all the necessary credentials
+        if(transferDto.getValue() == 0.0 || transferDto.getCategory() == null) {
+            result.rejectValue("value", null,
+                    "default error message");
+        }
+        //checking if the result of the action has errors
+        if(result.hasErrors()){
+            model.addAttribute("transfer", transferDto);
+            return "redirect:/addGroupTransfer?failure";
+        }
+
+        //getting the currently logged in user
+        SecurityContext context = SecurityContextHolder.getContext();
+        System.out.println(context.getAuthentication().getName());
+        UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
+        //we find the group that the transfer should be associated with
+
+        UserGroup userGroup = userDto.getUserGroup();
+        transferDto.setUserGroup(userGroup);
+
+        //saving the transfer in the database
+        transferService.saveTransfer(transferDto);
+
+        return "redirect:/addGroupTransfer?success";
+
     }
 
     @ExceptionHandler(InvalidUserIdFormatException.class)

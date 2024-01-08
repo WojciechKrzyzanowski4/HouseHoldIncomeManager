@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Add transfer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link href="addGroupTransfer.css" rel ="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/mainPage}">HH Income Manager</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/mainPage}">Back</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br /><br /><br />
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div th:if="${param.success}">
+            <div class="alert alert-info">
+                You have successfully added a transfer!
+            </div>
+        </div>
+        <div th:if="${param.failure}">
+            <div class="alert alert-danger">
+                Fill everything right!
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Add Main Group Income</h2>
+            </div>
+            <div class="card-body">
+                <form
+                        method="post"
+                        role="form"
+                        th:action="@{/addGroupTransfer/save}"
+                        th:object="${transfer}"
+
+                >
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Provide a value for your transfer:</label>
+                        <input
+                                class="form-control"
+                                id="value"
+                                name="value"
+                                placeholder="Type in amount"
+                                th:field="*{value}"
+                                type="text"
+                        />
+                        <p th:errors = "*{value}" class="text-danger"
+                           th:if="${#fields.hasErrors('value')}"></p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Select the category of your transfer:</label>
+                        <div class="radio-grid">
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'BILLS'}" /> Bills
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'FOOD'}" /> Food
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'INSURANCES'}" /> Insurances
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'TRANSPORT'}" /> Transport
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'HEALTHCARE'}" /> Healthcare
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'ENTERTAINMENT'}" /> Entertainment
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'TAXES'}" /> Taxes
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'GIFT'}" /> Gift
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'BONUS'}" /> Bonus
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'WORK_INCOME'}" /> Work Income
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'CURRENT_EXPENSES'}" /> Current expenses
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'ALLOWANCE'}" /> Allowance
+                                </label>
+                            </div>
+                            <div class="radio-item">
+                                <label>
+                                    <input type="radio" th:field="*{category}" th:value="${'OTHER'}" /> Other
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Select this checkbox if the transfer is recurring</label>
+
+                        <input
+                                type="checkbox"
+                                th:field="*{isRecurring}"
+                        />
+
+                        <label class="form-label">Monthly.</label>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="button" type="submit">Add transfer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

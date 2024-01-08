@@ -16,6 +16,7 @@ public interface TransferRepository extends CrudRepository<Transfer, Integer> {
     //if this piece of shit works I will be very impressed
     //the piece of shit did indeed work
 
-    List<Transfer> findByUser_id(Integer userID);
+    List<Transfer> findByUser_id(Integer userId);
+
 
 }

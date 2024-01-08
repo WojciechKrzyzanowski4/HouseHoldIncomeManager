@@ -64,7 +64,29 @@
         <!--this allows you to restrict different parts of the website depending on the user role-->
         <div th:if="${userRole == 'ROLE_ADMIN'}">
             <a class="btn btn-outline-dark" aria-current="page" th:href="@{/adduser}">Add new users to your group</a>
+            <a class="btn btn-outline-dark" aria-current="page" th:href="@{/addGroupTransfer}">Add incomes to your Group</a>
         </div>
+        <div>
+            <h2>All the transfers in your group</h2>
+        </div>
+        <table class="table table-bordered table-hover" id="data-table-tr">
+            <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Value</th>
+                <th>Category</th>
+                <th>Does it appear monthly</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each = "transfer : ${transfers}">
+                <td th:text = "${transfer.id}"></td>
+                <td th:text = "${transfer.value}"></td>
+                <td th:text = "${transfer.category}"></td>
+                <td th:text = "${transfer.isRecurring}"></td>
+            </tr>
+            </tbody>
+        </table>
 
 
     </div>
