@@ -34,6 +34,7 @@ public class TransferServiceImpl implements TransferService {
         transfer.setValue(transferDto.getValue());
         transfer.setUserGroup(transferDto.getUserGroup());
         transfer.setIsRecurring(transferDto.getIsRecurring());
+        transfer.setDate(transferDto.getDate());
 
         transferRepository.save(transfer);
     }
@@ -65,6 +66,7 @@ public class TransferServiceImpl implements TransferService {
         transferDto.setIsRecurring(transfer.getIsRecurring());
         transferDto.setValue(transfer.getValue());
         transferDto.setUser(transfer.getUser());
+        transferDto.setDate(transfer.getDate());
 
         return transferDto;
     }

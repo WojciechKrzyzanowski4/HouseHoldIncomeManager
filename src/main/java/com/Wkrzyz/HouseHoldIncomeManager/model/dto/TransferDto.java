@@ -5,6 +5,8 @@ import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
 
+import java.sql.Date;
+
 /**
  * Data transfer Object for the Transfer class
  * It used transfer only the necessary fields in a given action
@@ -17,6 +19,8 @@ public class TransferDto {
     private User user;
     private UserGroup userGroup;
     private boolean isRecurring;
+
+    private Date date;
 
     public TransferDto() {
 
@@ -75,5 +79,11 @@ public class TransferDto {
 
     public void setUserGroup(UserGroup userGroup){this.userGroup = userGroup;}
 
+    public Date getDate() {
+        return date;
+    }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

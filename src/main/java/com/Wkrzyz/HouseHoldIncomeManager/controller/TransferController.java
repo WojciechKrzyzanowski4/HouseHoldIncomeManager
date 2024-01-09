@@ -21,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -137,6 +139,10 @@ public class TransferController {
             Integer uId = Integer.parseInt(id);
             User user = userService.findUserById(uId);
             //setting the found user as the owner of the transfer
+
+            Date date = Date.valueOf(LocalDate.now());
+            transferDto.setDate(date);
+
             transferDto.setUser(user);
             //saving the transfer in the database
             transferService.saveTransfer(transferDto);
@@ -176,8 +182,12 @@ public class TransferController {
         UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
         //we find the group that the transfer should be associated with
 
+        Date date = Date.valueOf(LocalDate.now());
+        transferDto.setDate(date);
+
         UserGroup userGroup = userDto.getUserGroup();
         transferDto.setUserGroup(userGroup);
+
 
         //saving the transfer in the database
         transferService.saveTransfer(transferDto);

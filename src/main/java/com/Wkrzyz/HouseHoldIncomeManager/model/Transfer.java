@@ -3,6 +3,8 @@ package com.Wkrzyz.HouseHoldIncomeManager.model;
 import com.Wkrzyz.HouseHoldIncomeManager.enums.Category;
 import jakarta.persistence.*;
 
+import java.sql.Date;
+
 /**
  * Model class that represents the transfer table in the database
  */
@@ -16,6 +18,8 @@ public class Transfer {
     private double value;
 
     private Category category;
+
+    private Date date;
 
 
     @ManyToOne
@@ -34,12 +38,13 @@ public class Transfer {
 
     public Transfer() {}
 
-    public Transfer(Integer id, double value, Category category, User user, boolean isRecurring) {
+    public Transfer(Integer id, double value, Category category, Date date, User user, boolean isRecurring) {
         this.id = id;
         this.value = value;
         this.category = category;
         this.user = user;
         this.isRecurring = isRecurring;
+        this.date = date;
     }
 
     public Integer getId() {
@@ -89,5 +94,11 @@ public class Transfer {
         this.userGroup = userGroup;
     }
 
+    public Date getDate() {
+        return date;
+    }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

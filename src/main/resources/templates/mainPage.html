@@ -74,6 +74,7 @@
                 <th>Value</th>
                 <th>Category</th>
                 <th>Does it appear monthly</th>
+                <th>Date</th>
             </tr>
             </thead>
             <tbody>
@@ -82,6 +83,7 @@
                 <td th:text = "${transfer.value}"></td>
                 <td th:text = "${transfer.category}"></td>
                 <td th:text = "${transfer.isRecurring}"></td>
+                <td th:text = "${transfer.date}"></td>
             </tr>
             </tbody>
         </table>
