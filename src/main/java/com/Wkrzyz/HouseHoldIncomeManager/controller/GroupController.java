@@ -167,8 +167,14 @@ public class GroupController {
         try{
 
             //Modifying the userGroup in the database
+            //getting the currently logged in user
+            SecurityContext context = SecurityContextHolder.getContext();
+            System.out.println(context.getAuthentication().getName());
+            UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
 
-
+            UserGroup userGroup = userDto.getUserGroup();
+            userGroup.setBalance(userGroupDto.getBalance());
+            userGroupService.saveGroup(userGroup);
 
             return "redirect:/setLimits?success";
         }

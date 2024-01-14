@@ -12,6 +12,8 @@ public interface UserGroupService {
 
     void saveGroup(UserGroupDto userGroupDto);
 
+    void saveGroup(UserGroup userGroup);
+
     UserGroupDto findGroupDtoByAdmin(String admin);
 
     UserGroupDto findGroupDtoById(Integer id);

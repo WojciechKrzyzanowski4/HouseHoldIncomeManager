@@ -60,7 +60,7 @@ public class UserGroup {
     }
 
     public void setBalance(double balance) {
-        balance = balance;
+        this.balance = balance;
     }
 
     public List<User> getUsers() {

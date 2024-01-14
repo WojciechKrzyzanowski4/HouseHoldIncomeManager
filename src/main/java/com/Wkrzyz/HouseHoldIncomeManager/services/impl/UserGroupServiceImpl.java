@@ -40,6 +40,10 @@ public class UserGroupServiceImpl implements UserGroupService {
         userGroup.setUserGroupTransfers(userGroupDto.getUserGroupTransfers());
         userGroupRepository.save(userGroup);
     }
+    @Override
+    public void saveGroup(UserGroup userGroup){
+        userGroupRepository.save(userGroup);
+    }
 
     @Override
     public UserGroupDto findGroupDtoByAdmin(String admin) {
