@@ -144,7 +144,7 @@ public class GroupController {
     public String setLimits(Model model){
 
         UserGroupDto userGroup = new UserGroupDto();
-        userGroup.setBalance(0.0f);
+        userGroup.setBalance(0);
         String limit = "new String()";
         model.addAttribute("userGroup", userGroup);
         return "setLimits";
@@ -153,7 +153,8 @@ public class GroupController {
     @PostMapping("/setLimits/save")
     public String saveLimits(@ModelAttribute("userGroup") UserGroupDto userGroupDto, BindingResult result, Model model){
         //checking if the user provided all the necessary credentials
-        if(userGroupDto.getBalance() == 0.0 || userGroupDto.getBalance() == null) {
+
+        if(userGroupDto.getBalance() <= 0.0) {
             result.rejectValue("balance", null,
                     "default error message");
         }
@@ -164,7 +165,11 @@ public class GroupController {
         }
 
         try{
-            System.out.println(userGroupDto.getBalance());
+
+            //Modifying the userGroup in the database
+
+
+
             return "redirect:/setLimits?success";
         }
         catch(NumberFormatException | NullPointerException e) {

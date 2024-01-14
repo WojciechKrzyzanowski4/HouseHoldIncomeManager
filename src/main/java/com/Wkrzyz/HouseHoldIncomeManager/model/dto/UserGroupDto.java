@@ -13,7 +13,7 @@ public class UserGroupDto {
 
     private String name;
 
-    private Float balance;
+    private double balance;
 
     private String admin;
 
@@ -26,7 +26,7 @@ public class UserGroupDto {
     public UserGroupDto(){
 
     }
-    public UserGroupDto(Integer id, String name, Float balance, String admin, List<User> users, List<Transfer> userGroupTransfers) {
+    public UserGroupDto(Integer id, String name, double balance, String admin, List<User> users, List<Transfer> userGroupTransfers) {
         this.id = id;
         this.name = name;
         this.balance = balance;
@@ -51,11 +51,11 @@ public class UserGroupDto {
         this.name = name;
     }
 
-    public Float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(Float balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
