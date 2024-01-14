@@ -49,14 +49,23 @@ document.addEventListener('DOMContentLoaded', function () {
                     'rgba(255, 206, 86, 0.8)',
                     // Add more colors as needed
                 ],
-                borderColor: 'rgba(0, 0, 0, 1)', // Border color
+                color: 'rgba(255, 255, 255, 1)',
+                borderColor: 'rgba(255, 255, 255, 1)', // Border color
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white'
+                    }
+                }
+            }
         }
+
     });
 
 
@@ -99,18 +108,38 @@ document.addEventListener('DOMContentLoaded', function () {
             return {
                 responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                }
             };
         } else if (chartType === 'bar') {
             return {
                 //you could put the code for changing the data format here
                 responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                },
                 scales: {
                     x: {
                         beginAtZero: true,
+                         ticks: {
+                            color: 'white' // Y-axis category label color
+                        }
                     },
                     y: {
                         beginAtZero: true,
+                         ticks: {
+                            color: 'white' // Y-axis category label color
+                        }
                     },
                 },
             };
@@ -152,7 +181,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     'rgba(255, 206, 86, 0.8)',
                     // Add more colors as needed
                 ],
-                borderColor: 'rgba(0, 0, 0, 1)', // Border color
+                color: 'rgba(255, 255, 255, 1)',
+                borderColor: 'rgba(255, 255, 255, 1)', // Border color
                 borderWidth: 1
             }]
         };

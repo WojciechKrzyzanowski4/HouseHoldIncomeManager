@@ -1,6 +1,7 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #454545;
+    color: white;
 }
 
 #sidebar {
@@ -32,4 +33,8 @@ body {
     margin-top: 56px; /* Adjust this value based on your top navbar height */
     margin-left: 150px;
     padding: 20px;
+}
+
+#Scrollable_Div{
+    overflow-y: scroll; height:400px;
 }
