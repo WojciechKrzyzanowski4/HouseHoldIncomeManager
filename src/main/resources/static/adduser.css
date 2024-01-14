@@ -30,8 +30,8 @@ h2{
 }
 .button{
     background-color: rgb(169, 252, 212);
-    border: 2px solid black;
-    color: black;
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
     padding: 20px;
     text-align: center;
     text-decoration: none;
@@ -55,17 +55,6 @@ h2{
 
 span{
     color: black;
-}
-
-.radio-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.radio-item {
-    display: flex;
-    align-items: center;
 }
 
 .alert{

@@ -1,5 +1,5 @@
 body{
-    background-color:white;
+    background-color:#454545;
     background-size: 100% 100%;
     min-height: 100vh;
     overflow: hidden;
@@ -7,21 +7,29 @@ body{
 
 .row{
 
-    padding-top: 12%;
+    padding-top: 4%;
 
 }
 .card{
+
+    border-radius: 30px;
+    border: none;
+    background: #bcbcbc;
+    box-shadow:  24px 24px 49px #292929,
+                 -24px -24px 49px #292929;
+}
+.card-header{
     background-color: transparent;
-    border-radius: 20px;
-    border-color: black;
+    border: none;
 }
 h2{
     color:black;
+    width: auto;
     font-size: 30px;
-    border-color: transparent;
+
 }
 .button{
-    background-color: transparent;
+    background-color: rgb(169, 252, 212);
     border: 2px solid black;
     color: black;
     padding: 20px;
@@ -34,8 +42,8 @@ h2{
     transition-duration: 0.7s;
 }
 .button:hover {
-    color: white;
-    background-color:black;
+    color: rgb(0, 0, 0);
+    background-color:rgb(41, 201, 153);
     cursor: pointer;
 
 }
@@ -60,3 +68,6 @@ span{
     align-items: center;
 }
 
+.alert{
+    margin-top: 5%;
+}

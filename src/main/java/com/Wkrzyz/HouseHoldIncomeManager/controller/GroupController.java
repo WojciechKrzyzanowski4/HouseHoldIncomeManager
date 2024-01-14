@@ -4,10 +4,8 @@ import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
-import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserGroupDto;
-import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserGroupService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashSet;
 import java.util.List;
@@ -98,9 +95,9 @@ public class GroupController {
      * @return adduser page
      */
     @PostMapping("/adduser/save")
-    public String registration( @ModelAttribute("user") UserDto userDto,
-                                BindingResult result,
-                                Model model){
+    public String userAdd(@ModelAttribute("user") UserDto userDto,
+                          BindingResult result,
+                          Model model){
 
 
         //checking if the user provided all the necessary credentials
@@ -118,7 +115,7 @@ public class GroupController {
         //checking if the result of the action has errors
         if(result.hasErrors()){
             model.addAttribute("user", userDto);
-            return "redirect:/register?failure";
+            return "redirect:/adduser?failure";
         }
 
         //creating the roles set for the user

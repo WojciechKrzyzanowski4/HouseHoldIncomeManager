@@ -30,19 +30,9 @@
 <br /><br /><br />
 <div class="container">
     <div class="row col-md-8 offset-md-2">
-        <div th:if="${param.success}">
-            <div class="alert alert-info">
-                You have successfully added a transfer!
-            </div>
-        </div>
-        <div th:if="${param.failure}">
-            <div class="alert alert-danger">
-                Fill everything right!
-            </div>
-        </div>
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center">Add Main Group Income</h2>
+                <h2 class="text-center">Add Main Group Transfer</h2>
             </div>
             <div class="card-body">
                 <form
@@ -153,6 +143,16 @@
                         <button class="button" type="submit">Add transfer</button>
                     </div>
                 </form>
+            </div>
+        </div>
+        <div th:if="${param.success}">
+            <div class="alert alert-info">
+                You have successfully added a transfer!
+            </div>
+        </div>
+        <div th:if="${param.failure}">
+            <div class="alert alert-danger">
+                Fill everything right!
             </div>
         </div>
     </div>
