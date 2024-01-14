@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Add transfer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link href="setLimits.css" rel ="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/mainPage}">HH Income Manager</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/mainPage}">Back</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br /><br /><br />
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Set Limits</h2>
+            </div>
+            <div class="card-body">
+                <form
+                        method="post"
+                        role="form"
+                        th:action="@{/setLimits/save}"
+                        th:object="${userGroup}"
+
+                >
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Provide a max value which you want to be a limit</label>
+                        <input
+                                class="form-control"
+                                id="balance"
+                                name="balance"
+                                placeholder="Type in amount"
+                                th:field="*{balance}"
+                                type="text"
+                        />
+                        <p th:errors = "*{balance}" class="text-danger"
+                           th:if="${#fields.hasErrors('balance')}"></p>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <button class="button" type="submit">Set limit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div th:if="${param.success}">
+            <div class="alert alert-info">
+                You have successfully set a limit!
+            </div>
+        </div>
+        <div th:if="${param.failure}">
+            <div class="alert alert-danger">
+                Fill everything right!
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

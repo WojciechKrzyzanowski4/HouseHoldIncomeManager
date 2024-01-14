@@ -18,6 +18,8 @@ public class UserGroup {
 
     private String admin;
 
+
+
     @OneToMany(mappedBy = "userGroup", cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
 

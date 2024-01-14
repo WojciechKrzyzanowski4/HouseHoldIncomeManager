@@ -4,6 +4,7 @@ import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
+import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserGroupDto;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserGroupService;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -135,6 +138,40 @@ public class GroupController {
 
         //userService.saveUser(userDto);
         return "redirect:/adduser?success";
+    }
+
+    @GetMapping("/setLimits")
+    public String setLimits(Model model){
+
+        UserGroupDto userGroup = new UserGroupDto();
+        userGroup.setBalance(0.0f);
+        String limit = "new String()";
+        model.addAttribute("userGroup", userGroup);
+        return "setLimits";
+    }
+
+    @PostMapping("/setLimits/save")
+    public String saveLimits(@ModelAttribute("userGroup") UserGroupDto userGroupDto, BindingResult result, Model model){
+        //checking if the user provided all the necessary credentials
+        if(userGroupDto.getBalance() == 0.0 || userGroupDto.getBalance() == null) {
+            result.rejectValue("balance", null,
+                    "default error message");
+        }
+        //checking if the result of the action has errors
+        if(result.hasErrors()){
+            model.addAttribute("userGroup", userGroupDto);
+            return "redirect:/setLimits?failure";
+        }
+
+        try{
+            System.out.println(userGroupDto.getBalance());
+            return "redirect:/setLimits?success";
+        }
+        catch(NumberFormatException | NullPointerException e) {
+            //redirecting to the default unsuccessful URL
+            model.addAttribute("userGroup", userGroupDto);
+            return "redirect:/addtransfer?failure";
+        }
     }
 
 }
