@@ -3,6 +3,11 @@ body{
     background-size: 100% 100%;
     min-height: 100vh;
     overflow: hidden;
+    background-image: url('images/Background.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    color: white;
 }
 
 .row{
@@ -11,42 +16,41 @@ body{
 
 }
 .card{
-
-    border-radius: 30px;
-    border: none;
-    background: #bcbcbc;
-    box-shadow:  24px 24px 49px #292929,
-                 -24px -24px 49px #292929;
+    background-color: transparent;
+    border-radius: 20px;
+    border-color: white;
+    backdrop-filter: blur(10px); /* Adjust the blur intensity here */
 }
 .card-header{
     background-color: transparent;
     border: none;
 }
 h2{
-    color:black;
+    color:white;
     width: auto;
     font-size: 30px;
 
 }
-.button{
-    background-color: rgb(169, 252, 212);
-    border: 2px solid black;
-    color: black;
-    padding: 20px;
+
+ .button {
+    background-image: linear-gradient(to right, #ef32d9 0%, #89fffd  51%, #ef32d9  100%);
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
+    text-transform: uppercase;
+    height: 60px;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
     width: 100%;
     border-radius: 10px;
-    transition-duration: 0.7s;
-}
-.button:hover {
-    color: rgb(0, 0, 0);
-    background-color:rgb(41, 201, 153);
-    cursor: pointer;
+    display: block;
+  }
 
-}
+  .button:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+
 
 .control-label{
     font-size: 20px;

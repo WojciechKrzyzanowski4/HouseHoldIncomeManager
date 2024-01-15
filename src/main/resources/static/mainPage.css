@@ -2,6 +2,10 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #454545;
     color: white;
+    background-image: url('images/Background2.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
 }
 
 #sidebar {
@@ -30,11 +34,34 @@ body {
 }
 
 #content {
-    margin-top: 56px; /* Adjust this value based on your top navbar height */
-    margin-left: 150px;
+    margin-top: 100px; /* Adjust this value based on your top navbar height */
+    margin-left: 100px;
     padding: 20px;
 }
 
 #Scrollable_Div{
-    overflow-y: scroll; height:400px;
+    overflow-y: scroll;
+    height:400px;
+}
+
+.button {
+    background-image: linear-gradient(to right, #ef32d9 0%, #89fffd  51%, #ef32d9  100%);
+    height: 60px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    text-decoration: none; /* Remove underline */
+}
+
+.button:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
 }

@@ -56,14 +56,20 @@
 <div id="content">
     <div id="manage" class="container">
         <!-- group content area -->
-        <h2>Group Section</h2>
-        <h2 th:text = "${userGroup.name}"> is the name of the group</h2>
+
+        <h2>Manage&nbsp;<spav th:text ="${userGroup.name}"></spav></h2>
+
 
         <!--this allows you to restrict different parts of the website depending on the user role-->
         <div th:if="${userRole == 'ROLE_ADMIN'}">
-            <a class="btn btn-outline-dark" aria-current="page" th:href="@{/adduser}">Add new users to your group</a>
-            <a class="btn btn-outline-dark" aria-current="page" th:href="@{/addGroupTransfer}">Add incomes to your Group</a>
-            <a class="btn btn-outline-dark" aria-current="page" th:href="@{/setLimits}">Set limits to your group</a>
+            <div class="row justify-content-center">
+                <div class="col-sm">
+                    <a class="button" aria-current="page" th:href="@{/adduser}">Add new users to your group</a>
+                </div>
+                <div class="col-sm">
+                    <a class="button" aria-current="page" th:href="@{/addGroupTransfer}">Add incomes to your Group</a>
+                </div>
+            </div>
         </div>
         <div>
             <h2>All the transfers in your group</h2>
@@ -113,11 +119,11 @@
                 <td th:text = "${user.email}"></td>
                 <td>
                     <!--this works-->
-                    <a class="btn btn-outline-dark" aria-current="page" th:href="@{/addtransfer?id={idu}(idu=${user.id})}">ADD</a>
+                    <a class="button" aria-current="page" th:href="@{/addtransfer?id={idu}(idu=${user.id})}">ADD</a>
                 </td>
                 <td>
                     <!--this works-->
-                    <a class="btn btn-outline-dark" aria-current="page" th:href="@{/transfers?userId={idc}(idc=${user.id})}">VIEW</a>
+                    <a class="button" aria-current="page" th:href="@{/transfers?userId={idc}(idc=${user.id})}">VIEW</a>
                 </td>
             </tr>
             </tbody>
@@ -127,6 +133,11 @@
         <div class="row col-md-10" >
             <!-- Options content area -->
             <h2>Options section</h2>
+            <div id="buttonContainer">
+                <a class="button" aria-current="page" th:href="@{/setLimits}">Set limits to your group</a>
+
+
+            </div>
 
         </div>
     </div>
