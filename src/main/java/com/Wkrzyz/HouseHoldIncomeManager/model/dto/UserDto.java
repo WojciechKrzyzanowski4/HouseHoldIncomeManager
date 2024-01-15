@@ -41,7 +41,15 @@ public class UserDto {
         this.userGroup = user.getUserGroup();
     }
 
-
+    public UserDto(Integer id, String name, String email, String password, Set<Role> roles, List<Transfer> userTransfers, UserGroup userGroup) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.userTransfers = userTransfers;
+        this.userGroup = userGroup;
+    }
 
     public Integer getId() {
         return id;

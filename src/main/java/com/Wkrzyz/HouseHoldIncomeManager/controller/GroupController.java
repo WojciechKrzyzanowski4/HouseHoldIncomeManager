@@ -15,9 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -127,6 +125,7 @@ public class GroupController {
         roles.add(Role.USER);
         userDto.setRoles(roles);
 
+
         SecurityContext context = SecurityContextHolder.getContext();
         UserDto adminDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
 
@@ -142,7 +141,6 @@ public class GroupController {
 
     @GetMapping("/setLimits")
     public String setLimits(Model model){
-
         UserGroupDto userGroup = new UserGroupDto();
         userGroup.setBalance(0);
         String limit = "new String()";
@@ -151,6 +149,7 @@ public class GroupController {
     }
 
     @PostMapping("/setLimits/save")
+    @PutMapping("/setLimits/save")
     public String saveLimits(@ModelAttribute("userGroup") UserGroupDto userGroupDto, BindingResult result, Model model){
         //checking if the user provided all the necessary credentials
 
@@ -178,11 +177,10 @@ public class GroupController {
 
             return "redirect:/setLimits?success";
         }
-        catch(NumberFormatException | NullPointerException e) {
+        catch(NumberFormatException e) {
             //redirecting to the default unsuccessful URL
             model.addAttribute("userGroup", userGroupDto);
             return "redirect:/addtransfer?failure";
         }
     }
-
 }

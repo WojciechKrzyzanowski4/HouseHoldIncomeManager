@@ -53,6 +53,9 @@
                                 th:field="*{balance}"
                                 type="text"
                         />
+
+                        <input type="hidden" name="_method" value="put" /> <!-- Hidden field to simulate PUT method -->
+
                         <p th:errors = "*{balance}" class="text-danger"
                            th:if="${#fields.hasErrors('balance')}"></p>
 
