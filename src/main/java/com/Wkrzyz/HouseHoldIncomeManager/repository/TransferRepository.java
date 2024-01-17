@@ -4,7 +4,6 @@ import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Interface that extends CrudRepository and is used to retrieve data form the database

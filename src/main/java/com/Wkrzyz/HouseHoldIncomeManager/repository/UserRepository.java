@@ -3,8 +3,6 @@ package com.Wkrzyz.HouseHoldIncomeManager.repository;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Interface that extends CrudRepository and is used to retrieve data form the database

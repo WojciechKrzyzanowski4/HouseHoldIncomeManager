@@ -1,18 +1,12 @@
 package com.Wkrzyz.HouseHoldIncomeManager.services.impl;
 
-
-import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.repository.UserRepository;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

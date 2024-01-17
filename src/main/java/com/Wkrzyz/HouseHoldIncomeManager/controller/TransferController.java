@@ -6,7 +6,6 @@ import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
-import com.Wkrzyz.HouseHoldIncomeManager.services.UserGroupService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +21,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-
 @Controller
 public class TransferController {
-
 
     @Autowired
     private UserService userService;
@@ -33,19 +30,20 @@ public class TransferController {
     @Autowired
     private TransferService transferService;
 
-    @Autowired
-    private UserGroupService userGroupService;
 
-    /** handler method to handle adding a new transfer
+    /**
+     * handler method to handle adding a new transfer
+     * 
      * @param model
      * @param id
      * @return addtranfer page
      */
+    @SuppressWarnings("unused")
     @GetMapping("/addtransfer")
-    public String addTransfer(Model model, @RequestParam String id){
+    public String addTransfer(Model model, @RequestParam String id) {
 
         try {
-            //trying to parse the id
+            // trying to parse the id
             Integer superId = Integer.parseInt(id);
             User user = userService.findUserById(superId);
 
@@ -54,7 +52,7 @@ public class TransferController {
             throw new InvalidUserIdFormatException();
         }
 
-        //adding the current id as a model attribute
+        // adding the current id as a model attribute
         model.addAttribute("currId", id);
         TransferDto transfer = new TransferDto();
         transfer.setValue(0);
@@ -63,7 +61,9 @@ public class TransferController {
     }
 
     /**
-     * handler method to handle showing the transfers owned by the currently logged-in user
+     * handler method to handle showing the transfers owned by the currently
+     * logged-in user
+     * 
      * @param model
      * @param userId
      * @return transfers page
@@ -71,8 +71,8 @@ public class TransferController {
     @GetMapping("/transfers")
     public String findUserTransfers(Model model, @RequestParam(required = false) String userId) {
 
-        //System.out.println(userId);
-        //adding the current id as a model attribute
+        // System.out.println(userId);
+        // adding the current id as a model attribute
         model.addAttribute("currId", userId);
         Integer uId = 0;
         try {
@@ -80,17 +80,15 @@ public class TransferController {
         } catch (NumberFormatException e) {
             throw new InvalidUserIdFormatException();
         }
-        try{
+        try {
             UserDto userDto = userService.findUserDtoById(uId);
             List<TransferDto> transfers = transferService.findAllByOwner(uId);
             model.addAttribute("transfers", transfers);
             model.addAttribute("user", userDto);
 
-        }catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new InvalidUserIdFormatException();
         }
-
-
 
         return "transfers";
 
@@ -98,11 +96,12 @@ public class TransferController {
 
     /**
      * handler method to handle showing all the transfers in the database
+     * 
      * @param model
      * @return
      */
     @GetMapping("/transfers/all")
-    public String findTransfers(Model model){
+    public String findTransfers(Model model) {
         List<TransferDto> transfers = transferService.findAll();
         model.addAttribute("transfers", transfers);
         return "transfers";
@@ -110,74 +109,77 @@ public class TransferController {
 
     /**
      * handler method for saving a new transfer in the database
+     * 
      * @param transferDto
      * @param result
      * @param model
      * @param id
      * @return addtransfer page
      */
-
     @PostMapping("/addtransfer/save")
-    public String saveTransfer(@ModelAttribute("transfer") TransferDto transferDto, BindingResult result, Model model,  @RequestParam String id){
+    public String saveTransfer(@ModelAttribute("transfer") TransferDto transferDto, BindingResult result, Model model,
+            @RequestParam String id) {
 
-        //checking if the user provided all the necessary credentials
-        if(transferDto.getValue() == 0.0 || transferDto.getCategory() == null) {
+        // checking if the user provided all the necessary credentials
+        if (transferDto.getValue() == 0.0 || transferDto.getCategory() == null) {
             result.rejectValue("value", null,
                     "default error message");
         }
-        //checking if the result of the action has errors
-        if(result.hasErrors()){
+        // checking if the result of the action has errors
+        if (result.hasErrors()) {
             model.addAttribute("transfer", transferDto);
             return "redirect:/addtransfer?failure&id=" + id;
         }
-        //trying to parse the passed in ID string
-        try{
+        // trying to parse the passed in ID string
+        try {
 
             Integer uId = Integer.parseInt(id);
             User user = userService.findUserById(uId);
-            //setting the found user as the owner of the transfer
+            // setting the found user as the owner of the transfer
 
             Date date = Date.valueOf(LocalDate.now());
             transferDto.setDate(date);
 
             transferDto.setUser(user);
-            //saving the transfer in the database
+            // saving the transfer in the database
             transferService.saveTransfer(transferDto);
-            //redirecting to the default successful URL
+            // redirecting to the default successful URL
             return "redirect:/addtransfer?success&id=" + id;
-        }
-        catch(NumberFormatException e) {
-            //redirecting to the default unsuccessful URL
+        } catch (NumberFormatException e) {
+            // redirecting to the default unsuccessful URL
             model.addAttribute("transfer", transferDto);
             return "redirect:/addtransfer?failure&id=" + id;
         }
     }
+
     @GetMapping("/addGroupTransfer")
-    public String addGroupTransfer(Model model){
+    public String addGroupTransfer(Model model) {
         TransferDto transfer = new TransferDto();
         transfer.setValue(0);
         model.addAttribute("transfer", transfer);
         return "addGroupTransfer";
     }
-    @PostMapping("/addGroupTransfer/save")
-    public String saveGroupTransfer(@ModelAttribute("transfer") TransferDto transferDto, BindingResult result, Model model){
 
-        //checking if the user provided all the necessary credentials
-        if(transferDto.getValue() == 0.0 || transferDto.getCategory() == null) {
+    @PostMapping("/addGroupTransfer/save")
+    public String saveGroupTransfer(@ModelAttribute("transfer") TransferDto transferDto, BindingResult result,
+            Model model) {
+
+        // checking if the user provided all the necessary credentials
+        if (transferDto.getValue() == 0.0 || transferDto.getCategory() == null) {
             result.rejectValue("value", null,
                     "default error message");
         }
-        //checking if the result of the action has errors
-        if(result.hasErrors()){
+        // checking if the result of the action has errors
+        if (result.hasErrors()) {
             model.addAttribute("transfer", transferDto);
             return "redirect:/addGroupTransfer?failure";
         }
 
-        //getting the currently logged in user
+        // getting the currently logged in user
         SecurityContext context = SecurityContextHolder.getContext();
         System.out.println(context.getAuthentication().getName());
         UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
-        //we find the group that the transfer should be associated with
+        // we find the group that the transfer should be associated with
 
         Date date = Date.valueOf(LocalDate.now());
         transferDto.setDate(date);
@@ -185,8 +187,7 @@ public class TransferController {
         UserGroup userGroup = userDto.getUserGroup();
         transferDto.setUserGroup(userGroup);
 
-
-        //saving the transfer in the database
+        // saving the transfer in the database
         transferService.saveTransfer(transferDto);
 
         return "redirect:/addGroupTransfer?success";
@@ -200,7 +201,5 @@ public class TransferController {
         model.addAttribute("message", message);
         return "error"; // This points to the error.html template
     }
-
-
 
 }

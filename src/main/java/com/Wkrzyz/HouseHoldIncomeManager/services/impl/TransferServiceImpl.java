@@ -1,18 +1,11 @@
 package com.Wkrzyz.HouseHoldIncomeManager.services.impl;
 
 import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
-import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
-import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.repository.TransferRepository;
-import com.Wkrzyz.HouseHoldIncomeManager.repository.UserRepository;
 import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
-import jakarta.transaction.Transaction;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

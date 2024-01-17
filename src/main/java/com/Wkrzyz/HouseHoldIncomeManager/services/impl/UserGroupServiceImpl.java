@@ -14,7 +14,6 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 
     public UserGroupServiceImpl(UserGroupRepository userGroupRepository ) {
-        
         this.userGroupRepository = userGroupRepository;
     }
     @Override
