@@ -4,7 +4,6 @@ import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
-import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserGroupDto;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserGroupService;
@@ -17,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -143,7 +140,6 @@ public class GroupController {
     public String setLimits(Model model){
         UserGroupDto userGroup = new UserGroupDto();
         userGroup.setBalance(0);
-        String limit = "new String()";
         model.addAttribute("userGroup", userGroup);
         return "setLimits";
     }

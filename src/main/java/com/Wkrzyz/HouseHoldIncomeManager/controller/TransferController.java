@@ -1,17 +1,13 @@
 package com.Wkrzyz.HouseHoldIncomeManager.controller;
 
-import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.exception.InvalidUserIdFormatException;
-import com.Wkrzyz.HouseHoldIncomeManager.model.Transfer;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.TransferDto;
 import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserDto;
-import com.Wkrzyz.HouseHoldIncomeManager.model.dto.UserGroupDto;
 import com.Wkrzyz.HouseHoldIncomeManager.services.TransferService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserGroupService;
 import com.Wkrzyz.HouseHoldIncomeManager.services.UserService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContext;
@@ -25,7 +21,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
+
 
 @Controller
 public class TransferController {
