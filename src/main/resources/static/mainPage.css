@@ -65,3 +65,10 @@ body {
     color: #fff;
     text-decoration: none;
 }
+
+#myChartContainer{
+    width:400px;
+    height:600px;
+    position: center;
+    margin: auto auto;
+}
