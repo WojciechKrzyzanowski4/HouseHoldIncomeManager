@@ -72,3 +72,12 @@ body {
     position: center;
     margin: auto auto;
 }
+
+.card{
+    padding: 50px;
+    margin-top: 50px;
+    background-color: transparent;
+    border-radius: 20px;
+    border-color: white;
+    backdrop-filter: blur(10px); /* Adjust the blur intensity here */
+}
