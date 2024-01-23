@@ -57,24 +57,27 @@
     <div id="manage" class="container">
         <!-- group content area -->
 
-        <h2>Manage&nbsp;<spav th:text ="${userGroup.name}"></spav></h2>
-
-
         <!--this allows you to restrict different parts of the website depending on the user role-->
         <div th:if="${userRole == 'ROLE_ADMIN'}">
-            <div class="row justify-content-center">
-                <div class="col-sm">
-                    <a class="button" aria-current="page" th:href="@{/adduser}">Add new users to your group</a>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Manage&nbsp;<spav th:text ="${userGroup.name}"></spav></h2>
                 </div>
-                <div class="col-sm">
-                    <a class="button" aria-current="page" th:href="@{/addGroupTransfer}">Add transfer to your Group</a>
+                <div class="row justify-content-center">
+                    <div class="col-sm">
+                        <a class="button" aria-current="page" th:href="@{/adduser}">Add new users to your group</a>
+                    </div>
+                    <div class="col-sm">
+                        <a class="button" aria-current="page" th:href="@{/addGroupTransfer}">Add transfer to your Group</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div>
-            <h2>All the transfers in your group</h2>
-        </div>
+
         <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">All the transfers in your group</h2>
+            </div>
             <div id="Scrollable_Div">
                 <table class="table table-striped table-dark" id="data-table-tr">
                     <thead class="table-dark">
@@ -114,47 +117,48 @@
     </div>
     <div id="users" class="container">
         <!-- users content area -->
-        <div class="row col-md-10" >
-            <h2>List of Users in Your HouseHold</h2>
-        </div>
-        <table class="table table-striped table-dark" id="data-table">
-            <thead class="table-dark">
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Add transfers</th>
-                <th>User transfers</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each = "user : ${users}">
-                <td th:text = "${user.id}"></td>
-                <td th:text = "${user.name}"></td>
-                <td th:text = "${user.email}"></td>
-                <td>
-                    <!--this works-->
-                    <a class="button" aria-current="page" th:href="@{/addtransfer?id={idu}(idu=${user.id})}">ADD</a>
-                </td>
-                <td>
-                    <!--this works-->
-                    <a class="button" aria-current="page" th:href="@{/transfers?userId={idc}(idc=${user.id})}">VIEW</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div id="options" class="container">
-        <div class="row col-md-10" >
-            <!-- Options content area -->
-            <h2>Options section</h2>
-            <div id="buttonContainer">
-                <a class="button" aria-current="page" th:href="@{/setLimits}">Set limits to your group</a>
-
-
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">List of Users in Your HouseHold</h2>
             </div>
-
+            <table class="table table-striped table-dark" id="data-table">
+                <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Add transfers</th>
+                    <th>User transfers</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each = "user : ${users}">
+                    <td th:text = "${user.id}"></td>
+                    <td th:text = "${user.name}"></td>
+                    <td th:text = "${user.email}"></td>
+                    <td>
+                        <!--this works-->
+                        <a class="button" aria-current="page" th:href="@{/addtransfer?id={idu}(idu=${user.id})}">ADD</a>
+                    </td>
+                    <td>
+                        <!--this works-->
+                        <a class="button" aria-current="page" th:href="@{/transfers?userId={idc}(idc=${user.id})}">VIEW</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
+
+    <div id="options" class="container">
+      
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Managing group wide settings</h2>
+            </div>
+            <a class="button" aria-current="page" th:href="@{/setLimits}">Set limits to your group</a>
+        </div>
+    
     </div>
 </div>
 

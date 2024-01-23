@@ -44,9 +44,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 label: 'Values',
                 data: currentData,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.8)',
-                    'rgba(54, 162, 235, 0.8)',
-                    'rgba(255, 206, 86, 0.8)',
+                    "rgba(255, 99, 132, 0.8)",
+                    "rgba(219, 112, 147, 0.8)",
+                    "rgba(184, 125, 161, 0.8)",
+                    "rgba(149, 137, 175, 0.8)",
+                    "rgba(114, 150, 190, 0.8)",
+                    "rgba(79, 162, 204, 0.8)"
                     // Add more colors as needed
                 ],
                 color: 'rgba(255, 255, 255, 1)',
@@ -176,9 +179,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 label: 'Values',
                 data: newCurrentData,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.8)',
-                    'rgba(54, 162, 235, 0.8)',
-                    'rgba(255, 206, 86, 0.8)',
+                    "rgba(255, 99, 132, 0.8)",
+                    "rgba(219, 112, 147, 0.8)",
+                    "rgba(184, 125, 161, 0.8)",
+                    "rgba(149, 137, 175, 0.8)",
+                    "rgba(114, 150, 190, 0.8)",
+                    "rgba(79, 162, 204, 0.8)"
                     // Add more colors as needed
                 ],
                 color: 'rgba(255, 255, 255, 1)',
