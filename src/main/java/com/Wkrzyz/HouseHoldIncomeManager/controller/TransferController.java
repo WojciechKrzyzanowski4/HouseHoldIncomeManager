@@ -1,5 +1,6 @@
 package com.Wkrzyz.HouseHoldIncomeManager.controller;
 
+import com.Wkrzyz.HouseHoldIncomeManager.enums.Role;
 import com.Wkrzyz.HouseHoldIncomeManager.exception.InvalidUserIdFormatException;
 import com.Wkrzyz.HouseHoldIncomeManager.model.User;
 import com.Wkrzyz.HouseHoldIncomeManager.model.UserGroup;
@@ -135,8 +136,15 @@ public class TransferController {
 
             Integer uId = Integer.parseInt(id);
             User user = userService.findUserById(uId);
-            // setting the found user as the owner of the transfer
 
+            //checking if a tiny user is trying to add an income to himself
+            SecurityContext context = SecurityContextHolder.getContext();
+            UserDto userCheckDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
+            if(userCheckDto.getRoles().contains(Role.TINY) && transferDto.getValue() > 0){
+                return "redirect:/addtransfer?tooTiny&id=" + id;
+            }
+            // setting the found user as the owner of the transfer
+            
             Date date = Date.valueOf(LocalDate.now());
             transferDto.setDate(date);
 

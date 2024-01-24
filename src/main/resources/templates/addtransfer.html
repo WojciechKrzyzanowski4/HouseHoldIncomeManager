@@ -155,6 +155,11 @@
                 Fill everything right!
             </div>
         </div>
+        <div th:if="${param.tooTiny}">
+            <div class="alert alert-danger">
+                You are a child you cannot add a Income because you don't make money
+            </div>
+        </div>
     </div>
 </div>
 </body>

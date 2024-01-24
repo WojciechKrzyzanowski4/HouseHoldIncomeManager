@@ -100,7 +100,7 @@ public class GroupController {
 
 
         //checking if the user provided all the necessary credentials
-        if(userDto.getEmail().equals("") || userDto.getPassword().equals("") || userDto.getName().equals("")){
+        if(userDto.getEmail().equals("") || userDto.getPassword().equals("") || userDto.getName().equals("") || userDto.getAge()==null){
             result.rejectValue("email", null,
                     "default error message");
         }
@@ -118,21 +118,22 @@ public class GroupController {
         }
 
         //creating the roles set for the user
-        //this should be implemented so that it allows the admin the choice between user and tiny
+        //the privilege lever of the user reflects his age
+        
         Set<Role> roles = new HashSet<>();
-        roles.add(Role.USER);
-        userDto.setRoles(roles);
-
+        if(userDto.getAge() != null && userDto.getAge()<14){
+            roles.add(Role.TINY);
+            userDto.setRoles(roles);
+        }else{
+            roles.add(Role.USER);
+            userDto.setRoles(roles);
+        }
 
         SecurityContext context = SecurityContextHolder.getContext();
         UserDto adminDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
-
         UserGroup userGroup = userGroupService.findGroupByAdmin(adminDto.getEmail());
-
         userDto.setUserGroup(userGroup);
-        //saving the admin in the database
         userService.saveUser(userDto);
-
         //userService.saveUser(userDto);
         return "redirect:/adduser?success";
     }

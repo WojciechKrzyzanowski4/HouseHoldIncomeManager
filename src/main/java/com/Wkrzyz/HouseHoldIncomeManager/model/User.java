@@ -22,6 +22,8 @@ public class User {
 
     private String password;
 
+    private Integer age;
+
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
@@ -43,12 +45,13 @@ public class User {
         this.password = password;
     }
 
-    public User(Integer id, String name, String email, String password, Set<Role> roles) {
+    public User(Integer id, String name, String email, String password, Set<Role> roles, Integer age) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.age = age;
     }
 
     public Integer getId() {
@@ -106,5 +109,14 @@ public class User {
 
     public void setUserGroup(UserGroup userGroup) {
         this.userGroup = userGroup;
+    }
+
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

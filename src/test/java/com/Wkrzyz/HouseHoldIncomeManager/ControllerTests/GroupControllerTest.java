@@ -68,7 +68,7 @@ public class GroupControllerTest {
     @Test
     public void testUserAdd1() throws Exception {
         //insufficient parameters
-        UserDto mockUserDto = new UserDto(33, "", "", "password", null , null, null);
+        UserDto mockUserDto = new UserDto(33, "", "", "password", null , null, null, 0);
         mockMvc.perform(MockMvcRequestBuilders.post("/adduser/save")
                         .flashAttr("user", mockUserDto)) // Set form parameters as needed
                         .andExpect(MockMvcResultMatchers.status().is3xxRedirection()) // Assuming a redirect on success
@@ -77,7 +77,7 @@ public class GroupControllerTest {
     @Test
     public void testUserAdd2() throws Exception {
         //email already exists
-        UserDto mockUserDto = new UserDto(33, "imie", "", "password", null , null, null);
+        UserDto mockUserDto = new UserDto(33, "imie", "", "password", null , null, null, 0);
         mockMvc.perform(MockMvcRequestBuilders.post("/adduser/save")
                         .flashAttr("user", mockUserDto)) // Set form parameters as needed
                         .andExpect(MockMvcResultMatchers.status().is3xxRedirection()) // Assuming a redirect on success

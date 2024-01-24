@@ -19,6 +19,8 @@ public class UserDto {
 
     private String email;
 
+    private Integer age;
+
     private String password;
 
     private Set<Role> roles;
@@ -39,9 +41,10 @@ public class UserDto {
         this.roles = user.getRoles();
         this.userTransfers = user.getUserTransfers();
         this.userGroup = user.getUserGroup();
+        this.age = user.getAge();
     }
 
-    public UserDto(Integer id, String name, String email, String password, Set<Role> roles, List<Transfer> userTransfers, UserGroup userGroup) {
+    public UserDto(Integer id, String name, String email, String password, Set<Role> roles, List<Transfer> userTransfers, UserGroup userGroup, Integer age) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -49,6 +52,7 @@ public class UserDto {
         this.roles = roles;
         this.userTransfers = userTransfers;
         this.userGroup = userGroup;
+        this.age = age;
     }
 
     public Integer getId() {
@@ -105,5 +109,14 @@ public class UserDto {
 
     public void setUserGroup(UserGroup userGroup) {
         this.userGroup = userGroup;
+    }
+
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
