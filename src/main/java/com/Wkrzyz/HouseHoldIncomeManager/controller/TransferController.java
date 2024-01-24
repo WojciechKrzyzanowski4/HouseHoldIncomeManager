@@ -43,7 +43,7 @@ public class TransferController {
     public String addTransfer(Model model, @RequestParam String id) {
 
         try {
-            // trying to parse the id
+            // trying to parse the id`
             Integer superId = Integer.parseInt(id);
             User user = userService.findUserById(superId);
 

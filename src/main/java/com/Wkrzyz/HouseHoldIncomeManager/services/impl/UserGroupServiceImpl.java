@@ -60,6 +60,7 @@ public class UserGroupServiceImpl implements UserGroupService {
         userGroupDto.setName(userGroup.getName());
         userGroupDto.setUsers(userGroup.getUsers());
         userGroupDto.setUserGroupTransfers(userGroup.getUserGroupTransfers());
+        userGroupDto.setBalance(userGroup.getBalance());
 
         return userGroupDto;
 

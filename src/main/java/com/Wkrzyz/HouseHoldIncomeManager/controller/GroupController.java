@@ -44,6 +44,7 @@ public class GroupController {
         UserDto userDto = userService.findUserDtoByEmail(context.getAuthentication().getName());
 
         String role = "";
+        model.addAttribute("currUserId", userDto.getId());
         if(userDto.getRoles().contains(Role.ADMIN)){
             role = "ROLE_ADMIN";
         }else if(userDto.getRoles().contains(Role.USER)){

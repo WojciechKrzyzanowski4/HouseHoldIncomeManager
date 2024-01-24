@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var currentDataScope = false;
     var table = document.getElementById('data-table');
 
+    var originalTableState = document.getElementById('data-table').innerHTML;
+
     var labels = new Set();
     var data = [];
 
@@ -192,5 +194,78 @@ document.addEventListener('DOMContentLoaded', function () {
                 borderWidth: 1
             }]
         };
+    }
+    var dropdown = document.getElementById('custom-dropdown');
+    dropdown.addEventListener('click', toggleDropdown);
+
+    var dropdownOptions = document.getElementById("dropdownOptions");
+    dropdownOptions.style.display = "none";
+
+    var options = document.querySelectorAll(".custom-dropdown-option");
+    options.forEach(function(option) {
+        option.addEventListener('click', function() {
+            selectOption(option.innerHTML);
+        });
+    });
+    function toggleDropdown() {
+        dropdownOptions.style.display = (dropdownOptions.style.display === "block") ? "none" : "block";
+    }
+
+    function selectOption(option) {
+        var dropdown = document.querySelector('.custom-dropdown');
+        dropdown.innerHTML = option;
+        toggleDropdown();
+
+        var tableToRemove = [];
+
+        document.getElementById('data-table').innerHTML = originalTableState;
+
+
+        switch (option.toString()) {
+            case "Monthly":
+                for (i = 1; i < table.rows.length; i++) {
+                    if (table.rows[i].cells[3].innerText !== 'Yes') {
+                        tableToRemove.push(i);
+                    }
+                }
+                break;
+            case "Current month":
+                var currentDate = new Date();
+                var currentYear = currentDate.getFullYear();
+                var month = currentDate.getMonth() + 1;
+                for (i = 1; i < table.rows.length; i++) {
+                    var dataYear = parseInt(table.rows[i].cells[4].innerText.split("-")[0]);
+                    var dataMonth = parseInt(table.rows[i].cells[4].innerText.split("-")[1]);
+                    if (dataMonth !== month || currentYear !== dataYear) {
+                        tableToRemove.push(i);
+                    }
+                }
+                break;
+            case "Current year":
+                var currentDate = new Date();
+                var currentYear = currentDate.getFullYear();
+                for (i = 1; i < table.rows.length; i++) {
+                    var dataYear = parseInt(table.rows[i].cells[4].innerText.split("-")[0]);
+                    if (dataYear !== currentYear) {
+                        tableToRemove.push(i);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+        // Remove rows from the table
+        for (i = tableToRemove.length - 1; i >= 0; i--) {
+            table.deleteRow(tableToRemove[i]);
+        }
+
+        if(currentDataScope){
+            myCategoryChart.data = getNeededData(labels, -1);
+        }else{
+            myCategoryChart.data = getNeededData(labels, 1);
+        }
+        myCategoryChart.update();
+
     }
 });

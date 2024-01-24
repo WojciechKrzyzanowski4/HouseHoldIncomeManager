@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     data: {
         labels: labels,
         datasets: [{
-        label: 'Values',
+        label: 'Transfers',
         data: data,
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(75, 192, 192, 1)',

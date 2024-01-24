@@ -39,6 +39,13 @@
             <h2 class="text-center">The transfers that belong to:</h2>
             <h2 class="text-center" th:text = "${user.name}"></h2>
         </div>
+        <div class="custom-dropdown" id="custom-dropdown">Sort charts by:</div>
+        <div class="custom-dropdown-options" id="dropdownOptions">
+            <div class="custom-dropdown-option" id="dropdownOption1">Monthly</div>
+            <div class="custom-dropdown-option" id="dropdownOption2">Current month</div>
+            <div class="custom-dropdown-option" id="dropdownOption3">Current year</div>
+            <div class="custom-dropdown-option" id="dropdownOption4">All</div>
+        </div>
         <table class="table table-striped table-dark" id="data-table">
             <thead class="table-dark">
             <tr>
