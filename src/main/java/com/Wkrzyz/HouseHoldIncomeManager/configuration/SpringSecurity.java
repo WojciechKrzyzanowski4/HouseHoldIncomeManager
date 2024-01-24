@@ -38,6 +38,7 @@ public class SpringSecurity {
                                 .requestMatchers("/adduser").authenticated()
                                 .requestMatchers("/mainPage").hasAnyRole("ADMIN","USER","TINY")
                                 .requestMatchers("/adminPage").hasAnyRole("USER","ADMIN")
+                                .requestMatchers("/setLimits").authenticated()
                                 .anyRequest().permitAll()
 
                 ).formLogin(
