@@ -10,4 +10,4 @@
 
 ## Tech Stack
 
-**back-end:** Spring Boot, bootstrap, thymeleaf, other stupid things
+**back-end:** Spring Boot, bootstrap, thymeleaf
